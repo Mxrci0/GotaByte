@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="index.js">
+    
 
       <nav class="bg-white shadow-sm py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
@@ -17,13 +17,13 @@
             </div>
             
             <div class="hidden md:flex space-x-6">
-                <a href="#" class="text-gray-600 hover:text-cyan-600">Home</a>
-                <a href="#" class="text-gray-600 hover:text-cyan-600">Sobre</a>
-                <a href="#" class="text-gray-600 hover:text-cyan-600">Contato</a>
+                <a href="paginain.html" class="text-gray-600 hover:text-cyan-600">Home</a>
+                <a href="feed.html" class="text-gray-600 hover:text-cyan-600">Feedback</a>
+                <a href="ajuda.html" class="text-gray-600 hover:text-cyan-600">Ajuda</a>
             </div>
             
             <div class="flex items-center space-x-4">
-                <a href="#" class="text-gray-600 hover:text-cyan-600">
+                <a href="perfil.html" class="text-gray-600 hover:text-cyan-600">
                     <i class="fas fa-user mr-1"></i> Perfil
                 </a>
                 <a href="Index.html" class="text-gray-600 hover:text-cyan-600">
@@ -42,7 +42,12 @@
     </nav>
 </head>
  
-    <div class="login-card bg-white rounded-xl p-8 w-full max-w-md">
+<body class="min-h-screen bg-gray-100 flex flex-col">
+    <!-- navegação vai aqui (não alterada) -->
+
+    <main class="flex-grow flex items-center justify-center">
+        <div class="login-card bg-white rounded-xl p-8 w-full max-w-md shadow-md">
+
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-2">Bem-vindo</h1>
             <p class="text-gray-600">Selecione o tipo de acesso</p>
@@ -68,7 +73,6 @@
             <p>Precisa de ajuda? <a href="#" class="text-blue-500 hover:underline">Contate o suporte</a></p>
         </div>
     </div>
-
-    
+    <script src="index.js"></script> 
 </body>
 </html>
