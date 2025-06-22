@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        water: {
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            height: 300px;
+        }
+        
+        .consumption-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .water-wave {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .water-wave::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 40%;
+            animation: wave 8s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Ícones Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            water: {
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .chart-container {
+      height: 300px;
+    }
+    .consumption-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .water-wave {
+      position: relative;
+      overflow: hidden;
+    }
+    .water-wave::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 40%;
+      animation: wave 8s linear infinite;
+    }
+    @keyframes wave {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-water-50 min-h-screen">
+
+  <!-- ✅ NAV NO TOPO -->
+  <nav class="bg-white shadow-sm py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <i class="fas fa-tint text-cyan-500 text-2xl mr-2"></i>
+        <span class="text-xl font-bold">Gotabyte</span>
+      </div>
+      <div class="hidden md:flex space-x-6">
+         <a href="paginain.html" class="text-gray-600 hover:text-cyan-600">Home</a>
+                <a href="paginain.html" class="text-gray-600 hover:text-cyan-600">Home</a>
+                <a href="feed.html" class="text-gray-600 hover:text-cyan-600">Feedback</a>
+                <a href="ajuda.html" class="text-gray-600 hover:text-cyan-600">Ajuda</a>
+                <a href="his.html" class="text-gray-600 hover:text-cyan-600">Historico</a>
+                <a href="dicas.html" class="text-gray-600 hover:text-cyan-600">Dicas</a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="perfil.html" class="text-gray-600 hover:text-cyan-600">
+          <i class="fas fa-user mr-1"></i> Perfil
+        </a>
+        <a href="entrar.html" class="text-gray-600 hover:text-cyan-600">
+          <i class="fas fa-sign-in-alt mr-1"></i> Login
+        </a>
+        <a href="login.html" class="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700">
+          <i class="fas fa-user-plus mr-1"></i> Cadastro
+        </a>
+      </div>
+    </div>
+  </nav>
+
+<body class="bg-water-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-water-900">Histórico de Consumo</h1>
+                    <p class="text-water-600">Acompanhe seu consumo de água ao longo do tempo</p>
+                </div>
+                <div class="relative">
+                    <div class="water-wave bg-water-400 w-16 h-16 rounded-full flex items-center justify-center">
+                        <i class="fas fa-tint text-white text-2xl z-10"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="consumption-card bg-white rounded-xl shadow-md p-6 transition-all duration-300">
+                <div class="flex items-center">
+                    <div class="bg-water-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-calendar-week text-water-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-water-500 text-sm">Consumo Mensal</p>
+                        <h3 class="text-2xl font-bold text-water-800">18,5 m³</h3>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-water-600 mb-1">
+                        <span>Média: 15 m³</span>
+                        <span>+23%</span>
+                    </div>
+                    <div class="w-full bg-water-100 rounded-full h-2">
+                        <div class="bg-water-500 h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="consumption-card bg-white rounded-xl shadow-md p-6 transition-all duration-300">
+                <div class="flex items-center">
+                    <div class="bg-water-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-dollar-sign text-water-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-water-500 text-sm">Valor Médio</p>
+                        <h3 class="text-2xl font-bold text-water-800">R$ 85,20</h3>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-water-600 mb-1">
+                        <span>Economia: R$ 12,50</span>
+                        <span>-13%</span>
+                    </div>
+                    <div class="w-full bg-water-100 rounded-full h-2">
+                        <div class="bg-green-400 h-2 rounded-full" style="width: 65%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="consumption-card bg-white rounded-xl shadow-md p-6 transition-all duration-300">
+                <div class="flex items-center">
+                    <div class="bg-water-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-leaf text-water-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-water-500 text-sm">Meta de Redução</p>
+                        <h3 class="text-2xl font-bold text-water-800">82%</h3>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-water-600 mb-1">
+                        <span>Meta: 15% até dez/2023</span>
+                        <span class="text-green-500">+67%</span>
+                    </div>
+                    <div class="w-full bg-water-100 rounded-full h-2">
+                        <div class="bg-green-500 h-2 rounded-full" style="width: 82%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chart Section -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-water-900">Consumo Mensal (m³)</h2>
+                    <p class="text-water-500">Últimos 12 meses</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <select class="bg-water-50 border border-water-200 text-water-700 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-water-500">
+                        <option>Últimos 12 meses</option>
+                        <option>Últimos 6 meses</option>
+                        <option>Este ano</option>
+                        <option>Ano passado</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="consumptionChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Detailed History -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div class="px-6 py-4 border-b border-water-100">
+                <h2 class="text-xl font-bold text-water-900">Histórico Detalhado</h2>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-water-200">
+                    <thead class="bg-water-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-water-500 uppercase tracking-wider">Mês/Ano</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-water-500 uppercase tracking-wider">Consumo (m³)</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-water-500 uppercase tracking-wider">Valor (R$)</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-water-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-water-500 uppercase tracking-wider">Comparação</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-water-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-water-900">Out/2023</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">18,5</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">85,20</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Atenção</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">
+                                <div class="flex items-center">
+                                    <i class="fas fa-caret-up text-red-500 mr-1"></i>
+                                    <span class="text-red-500">+23%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-water-900">Set/2023</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">15,2</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">72,10</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Bom</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">
+                                <div class="flex items-center">
+                                    <i class="fas fa-caret-down text-green-500 mr-1"></i>
+                                    <span class="text-green-500">-5%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-water-900">Ago/2023</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">16,0</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">75,90</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Bom</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">
+                                <div class="flex items-center">
+                                    <i class="fas fa-caret-down text-green-500 mr-1"></i>
+                                    <span class="text-green-500">-12%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-water-900">Jul/2023</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">18,3</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">84,50</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Atenção</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">
+                                <div class="flex items-center">
+                                    <i class="fas fa-caret-up text-red-500 mr-1"></i>
+                                    <span class="text-red-500">+22%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-water-900">Jun/2023</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">14,8</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">70,30</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Bom</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-water-800">
+                                <div class="flex items-center">
+                                    <i class="fas fa-caret-down text-green-500 mr-1"></i>
+                                    <span class="text-green-500">-8%</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="px-6 py-4 bg-water-50 flex items-center justify-between border-t border-water-100">
+                <div class="text-sm text-water-600">
+                    Mostrando <span class="font-medium">1</span> a <span class="font-medium">5</span> de <span class="font-medium">12</span> registros
+                </div>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 border border-water-300 rounded-md text-sm font-medium text-water-700 bg-white hover:bg-water-50">
+                        Anterior
+                    </button>
+                    <button class="px-3 py-1 border border-water-300 rounded-md text-sm font-medium text-water-700 bg-white hover:bg-water-50">
+                        Próximo
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+       
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Chart Data
+        const ctx = document.getElementById('consumptionChart').getContext('2d');
+        const consumptionChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [{
+                    label: 'Consumo (m³)',
+                    data: [19.2, 18.5, 17.8, 16.3, 15.7, 14.8, 18.3, 16.0, 15.2, 18.5, 17.0, 16.5],
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    borderColor: 'rgba(14, 165, 233, 1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: 'white',
+                    pointBorderColor: 'rgba(14, 165, 233, 1)',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 12
+                        },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 10,
+                        max: 20,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' m³';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Animation for water wave
+        const waterWave = document.querySelector('.water-wave');
+        
+        waterWave.addEventListener('mouseenter', () => {
+            waterWave.style.animation = 'wave 4s linear infinite';
+        });
+        
+        waterWave.addEventListener('mouseleave', () => {
+            waterWave.style.animation = 'wave 8s linear infinite';
+        });
+    </script>
+</body>
+</html>
