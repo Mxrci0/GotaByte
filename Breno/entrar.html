@@ -28,31 +28,31 @@
   <!-- Navbar -->
   <nav class="bg-white shadow-sm py-4">
     <div class="container mx-auto px-4 flex justify-between items-center">
-      <div class="flex items-center">
-        <i class="fas fa-tint text-cyan-500 text-2xl mr-2"></i>
-        <span class="text-xl font-bold">Gotabyte</span>
-      </div>
-      <div class="hidden md:flex space-x-6">
-        
-                <a href="paginain.html" class="text-gray-600 hover:text-cyan-600">Home</a>
-                <a href="feed.html" class="text-gray-600 hover:text-cyan-600">Feedback</a>
-                <a href="ajuda.html" class="text-gray-600 hover:text-cyan-600">Ajuda</a>
-                <a href="his.html" class="text-gray-600 hover:text-cyan-600">Historico</a>
-                <a href="dicas.html" class="text-gray-600 hover:text-cyan-600">Dicas</a>
-      </div>
-      <div class="flex items-center space-x-4">
-        <a href="perfil.html" class="text-gray-600 hover:text-cyan-600">
-          <i class="fas fa-user mr-1"></i> Perfil
-        </a>
-        <a href="entrar.html" class="text-gray-600 hover:text-cyan-600">
-          <i class="fas fa-sign-in-alt mr-1"></i> Login
-        </a>
-        <a href="login.html" class="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700">
-          <i class="fas fa-user-plus mr-1"></i> Cadastro
-        </a>
-      </div>
+        <div class="flex items-center">
+            <i class="fas fa-tint text-cyan-500 text-2xl mr-2"></i>
+            <span class="text-xl font-bold">Gotabyte</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+            <a href="paginain.html" class="nav-link">Home</a>
+            <a href="feed.html" class="nav-link">Feedback</a>
+            <a href="ajuda.html" class="nav-link">Ajuda</a>
+            <a href="his.html" class="nav-link">Historico</a>
+            <a href="dicas.html" class="nav-link">Dicas</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="perfil.html" class="nav-link">
+                <i class="fas fa-user mr-1"></i> Perfil
+            </a>
+            <a href="entrar.html" class="nav-link">
+                <i class="fas fa-sign-in-alt mr-1"></i> Login
+            </a>
+            <a href="login.html" class="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700">
+                <i class="fas fa-user-plus mr-1"></i> Cadastro
+            </a>
+        </div>
     </div>
-  </nav>
+</nav>
+
 
   <!-- Formulário -->
   <main class="flex-grow flex items-center justify-center p-4">
@@ -195,6 +195,20 @@
         alert("Login enviado com sucesso!");
       });
     });
+      document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.nav-link');
+        const currentPage = window.location.pathname.split('/').pop();
+
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                link.classList.add('text-cyan-600', 'font-semibold');
+            } else {
+                link.classList.add('text-gray-600', 'hover:text-cyan-600');
+            }
+        });
+    });
+   
   </script>
 </body>
 </html>

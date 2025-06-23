@@ -157,3 +157,18 @@
             // Apenas verifica o tamanho (validação real seria mais complexa)
             return doc.length === 11 || doc.length === 14;
         }
+         document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.nav-link');
+        const currentPage = window.location.pathname.split('/').pop();
+
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                link.classList.add('text-cyan-600', 'font-semibold');
+            } else {
+                link.classList.add('text-gray-600', 'hover:text-cyan-600');
+            }
+        });
+    });
+   
+
