@@ -139,4 +139,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     item.classList.remove('active');
                 }
             });
-        }
+        }// Alterna menu mobile
+    document.getElementById('menu-button').addEventListener('click', function () {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Destaque do link ativo (hover fixo)
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.nav-link');
+        const currentPage = window.location.pathname.split('/').pop(); // pega o nome do arquivo atual
+
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                // Aplica estilo hover fixo no link ativo
+                link.classList.add('text-cyan-600', 'font-semibold');
+                link.classList.remove('text-gray-600');
+            } else {
+                // Links não ativos ficam cinza com hover cyan
+                link.classList.add('text-gray-600', 'hover:text-cyan-600');
+                link.classList.remove('text-cyan-600', 'font-semibold');
+            }
+        });
+    });
