@@ -4,7 +4,7 @@
             background-color: #f8fafc;
         }
         .register-card {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 25px -5px rgba(247, 247, 247, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         .btn-register {
             background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
