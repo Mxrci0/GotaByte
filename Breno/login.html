@@ -1,122 +1,368 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página de Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        .faq-item {
-            transition: all 0.3s ease;
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 300px;
-        }
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro Gotabyte</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .input-error {
+      border-color: #dc2626; /* red-600 */
+    }
+  </style>
 </head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
 
-<body class="bg-gray-50 font-sans">
-    
-    <!-- ✅ NAVBAR RESPONSIVA -->
-    <nav class="bg-white shadow-sm py-4">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-tint text-cyan-500 text-2xl mr-2"></i>
-                <span class="text-xl font-bold">Gotabyte</span>
-            </div>
+  <!-- NAVBAR -->
+  <nav class="bg-white shadow-sm py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <i class="fas fa-tint text-cyan-500 text-2xl mr-2"></i>
+        <span class="text-xl font-bold">Gotabyte</span>
+      </div>
 
-            <!-- Botão hamburguer (mobile) -->
-            <button class="md:hidden text-2xl text-gray-600" id="menu-button">
-                <i class="fas fa-bars"></i>
-            </button>
+      <!-- Botão hamburguer (mobile) -->
+      <button id="menu-button" class="md:hidden text-2xl text-gray-600">
+        <i class="fas fa-bars"></i>
+      </button>
 
-            <!-- Menu desktop -->
-            <div class="hidden md:flex space-x-6 items-center">
-                <a href="paginain.html" class="nav-link">Home</a>
-                <a href="feed.html" class="nav-link">Feedback</a>
-                <a href="ajuda.html" class="nav-link">Ajuda</a>
-                <a href="his.html" class="nav-link">Historico</a>
-                <a href="dicas.html" class="nav-link">Dicas</a>
-                <a href="perfil.html" class="nav-link"><i class="fas fa-user mr-1"></i> Perfil</a>
-                <a href="entrar.html" class="nav-link"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
-                <a href="login.html" class="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700"><i class="fas fa-user-plus mr-1"></i> Cadastro</a>
-            </div>
+      <!-- Menu desktop -->
+      <div id="desktop-menu" class="hidden md:flex space-x-6 items-center">
+        <a href="paginain.html" class="nav-link">Home</a>
+        <a href="feed.html" class="nav-link">Feedback</a>
+        <a href="ajuda.html" class="nav-link">Ajuda</a>
+        <a href="his.html" class="nav-link">Historico</a>
+        <a href="dicas.html" class="nav-link">Dicas</a>
+        <a href="perfil.html" class="nav-link"><i class="fas fa-user mr-1"></i> Perfil</a>
+        <a href="entrar.html" class="nav-link"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
+        <a href="login.html" class="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700"><i class="fas fa-user-plus mr-1"></i> Cadastro</a>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="md:hidden hidden px-4 mt-2 space-y-2">
+      <a href="paginain.html" class="block nav-link">Home</a>
+      <a href="feed.html" class="block nav-link">Feedback</a>
+      <a href="ajuda.html" class="block nav-link">Ajuda</a>
+      <a href="his.html" class="block nav-link">Historico</a>
+      <a href="dicas.html" class="block nav-link">Dicas</a>
+      <a href="perfil.html" class="block nav-link">Perfil</a>
+      <a href="entrar.html" class="block nav-link">Login</a>
+      <a href="login.html" class="block bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700">Cadastro</a>
+    </div>
+  </nav>
+
+  <!-- FORMULÁRIO -->
+  <main class="flex-grow flex items-center justify-center p-4">
+    <div class="register-card bg-white rounded-xl p-8 w-full max-w-md shadow-md">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Crie sua conta</h1>
+        <p class="text-gray-600">Preencha os campos abaixo para se cadastrar</p>
+      </div>
+
+      <form id="registrationForm" class="space-y-6" novalidate>
+        <!-- Nome/Razão Social -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome/Razão Social</label>
+          <input type="text" id="name" name="name" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+          <p id="nameError" class="hidden text-red-600 text-sm mt-1"></p>
         </div>
 
-        <!-- Menu mobile -->
-        <div id="mobile-menu" class="md:hidden hidden px-4 mt-2 space-y-2">
-            <a href="paginain.html" class="block nav-link">Home</a>
-            <a href="feed.html" class="block nav-link">Feedback</a>
-            <a href="ajuda.html" class="block nav-link">Ajuda</a>
-            <a href="his.html" class="block nav-link">Historico</a>
-            <a href="dicas.html" class="block nav-link">Dicas</a>
-            <a href="perfil.html" class="block nav-link">Perfil</a>
-            <a href="entrar.html" class="block nav-link">Login</a>
-            <a href="login.html" class="block bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700">Cadastro</a>
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input type="email" id="email" name="email" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+          <p id="emailError" class="hidden text-red-600 text-sm mt-1"></p>
         </div>
-    </nav>
 
+        <!-- CPF/CNPJ -->
+        <div>
+          <label for="document" class="block text-sm font-medium text-gray-700 mb-1">CPF/CNPJ</label>
+          <input type="text" id="document" name="document" placeholder="Digite sem pontos ou traços" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+          <p id="documentError" class="hidden text-red-600 text-sm mt-1"></p>
+        </div>
 
+        <!-- CEP + botão buscar -->
+        <div>
+          <label for="cep" class="block text-sm font-medium text-gray-700 mb-1">CEP</label>
+          <div class="flex">
+            <input type="text" id="cep" name="cep" placeholder="Apenas números" required
+              class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+            <button type="button" id="cep-button" 
+              class="bg-gray-200 px-4 rounded-r-lg hover:bg-gray-300 transition-colors">Buscar</button>
+          </div>
+          <p id="cepError" class="hidden text-red-600 text-sm mt-1"></p>
+        </div>
 
+        <!-- Endereço -->
+        <div>
+          <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Endereço</label>
+          <input type="text" id="address" name="address" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+          <p id="addressError" class="hidden text-red-600 text-sm mt-1"></p>
+        </div>
 
-    <!-- ✅ FORMULÁRIO CENTRALIZADO -->
-    <main class="flex-grow flex items-center justify-center p-4">
-        <div class="register-card bg-white rounded-xl p-8 w-full max-w-md shadow-md">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">Crie sua conta</h1>
-                <p class="text-gray-600">Preencha os campos abaixo para se cadastrar</p>
-            </div>
+       <!-- Senha -->
+<div class="relative">
+  <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+  <input
+    type="password"
+    id="password"
+    name="password"
+    required
+    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all pr-10"
+  />
+  <button
+    type="button"
+    id="togglePassword"
+    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-600 hover:text-gray-900"
+    tabindex="-1"
+    aria-label="Mostrar senha"
+  >
+    <i class="fas fa-eye"></i>
+  </button>
+  <p id="passwordError" class="hidden text-red-600 text-sm mt-1"></p>
+</div>
 
-            <form id="registrationForm" class="space-y-4">
-                <!-- Campos do formulário (sem alteração) -->
-                <!-- Nome/Razão Social -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome/Razão Social</label>
-                    <input type="text" id="name" name="name" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                        >
-                    <div id="nameError" class="error-message hidden">Por favor, insira seu nome ou razão social</div>
-                </div>
+<!-- Confirmação de Senha -->
+<div class="relative">
+  <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirme a senha</label>
+  <input
+    type="password"
+    id="confirmPassword"
+    name="confirmPassword"
+    required
+    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all pr-10"
+  />
+  <button
+    type="button"
+    id="toggleConfirmPassword"
+    class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-600 hover:text-gray-900"
+    tabindex="-1"
+    aria-label="Mostrar confirmação de senha"
+  >
+    <i class="fas fa-eye"></i>
+  </button>
+  <p id="confirmPasswordError" class="hidden text-red-600 text-sm mt-1"></p>
+</div>
 
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="email" name="email" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                        >
-                    <div id="emailError" class="error-message hidden">Por favor, insira um email válido</div>
-                </div>
+        <!-- Termos -->
+        <div class="flex items-center space-x-2">
+          <input type="checkbox" id="terms" name="terms" />
+          <label for="terms" class="text-gray-700 text-sm select-none">Aceito os <a href="#" class="text-cyan-600 underline">termos de uso</a></label>
+        </div>
+        <p id="termsError" class="hidden text-red-600 text-sm mt-1">Você precisa aceitar os termos para continuar</p>
 
-                <!-- CPF/CNPJ -->
-                <div>
-                    <label for="document" class="block text-sm font-medium text-gray-700 mb-1">CPF/CNPJ</label>
-                    <input type="text" id="document" name="document" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                       
-                        oninput="formatDocument(this)">
-                    <div id="documentError" class="error-message hidden">Por favor, insira um CPF ou CNPJ válido</div>
-                </div>
+        <!-- Botão enviar -->
+        <button type="submit" 
+          class="w-full py-3 bg-cyan-600 text-white rounded-lg font-semibold hover:bg-cyan-700 transition-all">
+          Cadastrar
+        </button>
+      </form>
+    </div>
+  </main>
 
-                <!-- CEP -->
-                <div>
-                    <label for="cep" class="block text-sm font-medium text-gray-700 mb-1">CEP</label>
-                    <div class="flex">
-                        <input type="text" id="cep" name="cep" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                          
-                            oninput="formatCEP(this)">
-                        <button type="button" onclick="searchCEP()" class="bg-gray-200 px-4 rounded-r-lg hover:bg-gray-300 transition-colors">
-                            Buscar
-                        </button>
-                    </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Toggle menu mobile
+      const menuButton = document.getElementById('menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Destacar link atual da navbar
+      const links = document.querySelectorAll('.nav-link');
+      const currentPage = window.location.pathname.split('/').pop();
+      links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+          link.classList.add('text-cyan-600', 'font-semibold');
+        } else {
+          link.classList.add('text-gray-600', 'hover:text-cyan-600');
+        }
+      });
+
+      // Formatar CPF/CNPJ no campo 'document'
+      const documentInput = document.getElementById('document');
+      documentInput.addEventListener('input', () => formatDocument(documentInput));
+
+      // Formatar CEP no campo 'cep'
+      const cepInput = document.getElementById('cep');
+      cepInput.addEventListener('input', () => formatCEP(cepInput));
+
+      // Botão buscar CEP
+      const cepButton = document.getElementById('cep-button');
+      cepButton.addEventListener('click', () => searchCEP());
+
+      // Validação do formulário
+      const form = document.getElementById('registrationForm');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        let isValid = true;
+
+        // Nome/Razão Social
+        const name = document.getElementById('name');
+        if (!name.value.trim()) {
+          showError(name, 'Por favor, insira seu nome ou razão social');
+          isValid = false;
+        } else {
+          hideError(name);
+        }
+
+        // Email
+        const email = document.getElementById('email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+          showError(email, 'Por favor, insira um email válido');
+          isValid = false;
+        } else {
+          hideError(email);
+        }
+
+        // CPF/CNPJ
+        const docVal = documentInput.value.replace(/\D/g, '');
+        if ((docVal.length !== 11 && docVal.length !== 14) || !validateDocument(docVal)) {
+          showError(documentInput, 'Por favor, insira um CPF ou CNPJ válido');
+          isValid = false;
+        } else {
+          hideError(documentInput);
+        }
+
+        // CEP
+        const cepVal = cepInput.value.replace(/\D/g, '');
+        if (cepVal.length !== 8) {
+          showError(cepInput, 'Por favor, insira um CEP válido');
+          isValid = false;
+        } else {
+          hideError(cepInput);
+        }
+
+        // Endereço
+        const address = document.getElementById('address');
+        if (!address.value.trim()) {
+          showError(address, 'Por favor, insira seu endereço');
+          isValid = false;
+        } else {
+          hideError(address);
+        }
+
+        // Senha
+        const password = document.getElementById('password');
+        if (password.value.length < 8) {
+          showError(password, 'A senha deve ter pelo menos 8 caracteres');
+          isValid = false;
+        } else {
+          hideError(password);
+        }
+
+        // Confirmação de Senha
+        const confirmPassword = document.getElementById('confirmPassword');
+        if (confirmPassword.value !== password.value) {
+          showError(confirmPassword, 'As senhas não coincidem');
+          isValid = false;
+        } else {
+          hideError(confirmPassword);
+        }
+
+        // Termos
+        const terms = document.getElementById('terms');
+        if (!terms.checked) {
+          document.getElementById('termsError').classList.remove('hidden');
+          isValid = false;
+        } else {
+          document.getElementById('termsError').classList.add('hidden');
+        }
+
+        if (isValid) {
+          alert('Cadastro realizado com sucesso!');
+          // form.submit();
+        }
+      });
+
+    });
+
+    // Formatar CPF/CNPJ
+    function formatDocument(input) {
+      let value = input.value.replace(/\D/g, '');
+
+      if (value.length <= 11) {
+        // CPF
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      } else {
+        // CNPJ
+        value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+        value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+        value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+        value = value.replace(/(\d{4})(\d)/, '$1-$2');
+      }
+
+      input.value = value;
+    }
+
+    // Formatar CEP
+    function formatCEP(input) {
+      let value = input.value.replace(/\D/g, '');
+
+      if (value.length > 5) {
+        value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+      }
+
+      input.value = value;
+    }
+
+    // Buscar CEP (simulação)
+    function searchCEP() {
+      const cepInput = document.getElementById('cep');
+      const cep = cepInput.value.replace(/\D/g, '');
+
+      if (cep.length !== 8) {
+        showError(cepInput, 'CEP inválido');
+        return;
+      }
+
+      const address = document.getElementById('address');
+      if (address) address.value = 'Carregando...';
+
+      setTimeout(() => {
+        if (address) address.value = 'Rua Exemplo, 123 - Centro, Cidade/UF';
+        hideError(cepInput);
+      }, 1000);
+    }
+
+    // Mostrar erro
+    function showError(input, message) {
+      if (!input) return;
+      input.classList.add('input-error');
+      const errorElement = document.getElementById(input.id + 'Error');
+      if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.remove('hidden');
+      }
+    }
+
+    // Esconder erro
+    function hideError(input) {
+      if (!input) return;
+      input.classList.remove('input-error');
+      const errorElement = document.getElementById(input.id + 'Error');
+      if (errorElement) {
+        errorElement.classList.add('hidden');
+      }
+    }
+
+    // Validar CPF/CNPJ simplificado
+    function validateDocument(doc) {
+      return doc.length === 11 || doc.length === 14;
+    }
+  </script>
+
+</body>
+</html>
