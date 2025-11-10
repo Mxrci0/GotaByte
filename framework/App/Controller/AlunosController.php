@@ -21,6 +21,18 @@ class AlunosController extends Action{
         $this->render('index', 'dashboard');
     }
     
+    public function cadastro(){
+        $title = "alunos";
+        $title_pagina = "Alunos";
+
+        
+
+        $this->getView()->title = $title;
+        $this->getView()->title_pagina = $title_pagina;
+
+        $this->render('cadastro', 'dashboard');
+    }
+    
     
     
 
