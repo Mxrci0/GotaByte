@@ -1,0 +1,251 @@
+
+  <style>
+    .bg-gradient-custom {
+      background: linear-gradient(#3b82f6 0%, #2563eb 100%);
+    }
+    .card-shadow {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .input-focus:focus {
+      border-color: #5171ff;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+    .shake {
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+ 
+
+    <style>
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    
+
+
+  <!-- CENTRO DA PÁGINA -->
+  <main class="flex-grow flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+      <div class="bg-white rounded-xl card-shadow overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-custom text-white p-6 text-center">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-lock text-2xl text-purple-600"></i>
+          </div>
+          <h1 class="text-2xl font-bold">Recuperação de Senha</h1>
+          <p class="text-purple-100 mt-2">Digite seu e-mail para receber as instruções</p>
+        </div>
+
+        <!-- Formulário -->
+        <div class="p-6 sm:p-8">
+          <form id="recoveryForm" class="space-y-6">
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fas fa-envelope text-gray-400"></i>
+                </div>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required 
+                  placeholder="seu@email.com"
+                  class="pl-10 input-focus w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none transition duration-200"
+                >
+              </div>
+              <p id="emailError" class="mt-1 text-sm text-red-600 hidden">Por favor, insira um e-mail válido</p>
+            </div>
+
+            <div>
+              <button 
+                type="submit" 
+                id="submitBtn"
+                class="w-full bg-gradient-custom text-white py-2 px-4 rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition duration-200 flex items-center justify-center"
+              >
+                <span id="btnText">Enviar Instruções</span>
+                <i id="btnSpinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+              </button>
+            </div>
+          </form>
+
+          <div class="mt-6 text-center">
+            <a href="entrar.html" class="text-sm text-purple-600 hover:text-purple-800 font-medium flex items-center justify-center">
+              <i class="fas fa-arrow-left mr-2"></i>
+              Voltar para o login
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL DE SUCESSO -->
+  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+    <div class="bg-white rounded-xl max-w-sm w-full p-6 text-center card-shadow">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-check text-2xl text-green-600"></i>
+      </div>
+      <h3 class="text-xl font-bold text-gray-800 mb-2">E-mail enviado!</h3>
+      <p class="text-gray-600 mb-4">Enviamos as instruções para redefinir sua senha para o e-mail informado.</p>
+      <button id="closeModal" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-200">
+        Fechar
+      </button>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('recoveryForm');
+      const emailInput = document.getElementById('email');
+      const emailError = document.getElementById('emailError');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnSpinner = document.getElementById('btnSpinner');
+      const successModal = document.getElementById('successModal');
+      const closeModal = document.getElementById('closeModal');
+
+      emailInput.addEventListener('blur', function () {
+        if (!emailInput.validity.valid) {
+          emailError.classList.remove('hidden');
+          emailInput.classList.add('border-red-500');
+          emailInput.classList.remove('border-gray-300');
+        } else {
+          emailError.classList.add('hidden');
+          emailInput.classList.remove('border-red-500');
+          emailInput.classList.add('border-gray-300');
+        }
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (!emailInput.validity.valid) {
+          emailError.classList.remove('hidden');
+          emailInput.classList.add('border-red-500', 'shake');
+          emailInput.classList.remove('border-gray-300');
+
+          setTimeout(() => {
+            emailInput.classList.remove('shake');
+          }, 500);
+
+          return;
+        }
+
+        btnText.textContent = 'Enviando...';
+        btnSpinner.classList.remove('hidden');
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          btnText.textContent = 'Enviar Instruções';
+          btnSpinner.classList.add('hidden');
+          submitBtn.disabled = false;
+          successModal.classList.remove('hidden');
+          form.reset();
+        }, 1500);
+      });
+
+      closeModal.addEventListener('click', function () {
+        successModal.classList.add('hidden');
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.nav-link');
+        const currentPage = window.location.pathname.split('/').pop();
+
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                link.classList.add('text-cyan-600', 'font-semibold');
+            } else {
+                link.classList.add('text-gray-600', 'hover:text-cyan-600');
+            }
+        });
+    });
+     // Toggle menu mobile
+        document.getElementById('menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Abrir primeiro item do FAQ
+        document.addEventListener('DOMContentLoaded', function () {
+            const firstFaq = document.querySelector('.faq-item');
+            if (firstFaq) firstFaq.classList.add('active');
+
+            // Destacar link atual
+            const links = document.querySelectorAll('.nav-link');
+            const currentPage = window.location.pathname.split('/').pop();
+
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPage) {
+                    link.classList.add('text-cyan-600', 'font-semibold');
+                } else {
+                    link.classList.add('text-gray-600', 'hover:text-cyan-600');
+                }
+            });
+        });
+
+        // FAQ toggle
+        function toggleFAQ(element) {
+            const faqItem = element.closest('.faq-item');
+            faqItem.classList.toggle('active');
+
+            const container = faqItem.parentElement;
+            container.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        // Alterna menu mobile
+    document.getElementById('menu-button').addEventListener('click', function () {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Destaque do link ativo (hover fixo)
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.nav-link');
+        const currentPage = window.location.pathname.split('/').pop(); // pega o nome do arquivo atual
+
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+                // Aplica estilo hover fixo no link ativo
+                link.classList.add('text-cyan-600', 'font-semibold');
+                link.classList.remove('text-gray-600');
+            } else {
+                // Links não ativos ficam cinza com hover cyan
+                link.classList.add('text-gray-600', 'hover:text-cyan-600');
+                link.classList.remove('text-cyan-600', 'font-semibold');
+            }
+        });
+    });
+  </script>
+
+</body>
+</html>
