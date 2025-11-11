@@ -31,6 +31,15 @@ class Route extends Boostrap
                 'is_dynamic' => $dbRoute['is_dynamic'],
                 'pattern' => $dbRoute['pattern'] ?? null
             );
+
+            foreach ($dbRoutes as $dbRoute) {
+                $routes[$dbRoute['index']] = array(
+                    'route' => '/' . $dbRoute['slug'],
+                    'controller' => $dbRoute['controller'],
+                    'action' => $dbRoute['action'],
+                    'is_dynamic' => $dbRoute['is_dynamic'],
+                    'pattern' => $dbRoute['pattern'] ?? null
+                );
         }
 
         
@@ -38,4 +47,5 @@ class Route extends Boostrap
 
         $this->setRoutes($routes);
     }
+}
 }
