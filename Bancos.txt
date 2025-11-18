@@ -1,0 +1,77 @@
+Banco perfil
+CREATE TABLE perfil (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+Necessidades 
+
+
+CREATE TABLE necessidades (
+    nec_id INT AUTO_INCREMENT PRIMARY KEY,
+    nec_titulo VARCHAR(150) NOT NULL,
+    nec_descricao TEXT NOT NULL,
+    nec_data DATE NOT NULL,
+    nec_prazo DATE NOT NULL,
+    nec_status ENUM('pendente', 'andamento', 'atendida') DEFAULT 'pendente',
+    nec_avaliacao VARCHAR(50),
+    nec_avaliacao_coment TEXT,
+    nec_localizacao VARCHAR(255),
+    nec_relatorio TEXT
+);
+
+Feedback
+
+CREATE TABLE Feedback (
+    nec_id INT AUTO_INCREMENT PRIMARY KEY,
+    nec_tipos VARCHAR(255) NOT NULL,          -- Ex: "Falta de água, Vazamento"
+    nec_descricao TEXT NOT NULL,              -- Descrição “Outros” ou texto composto
+    nec_avaliacao VARCHAR(50) NOT NULL,       -- Desgosto / Gosto / Gosto muito / Outros
+    nec_avaliacao_coment TEXT NULL,           -- comentário quando “Outros”
+    nec_localizacao VARCHAR(255) NULL,
+    nec_status VARCHAR(20) DEFAULT 'pendente', -- pendente / andamento / atendida
+    nec_data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    nec_prazo DATE NULL,                       -- calculado +7 dias
+    nec_relatorio TEXT NULL                    -- quando atendimento finalizado
+);
+
+Entrar 
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE,
+    telefone VARCHAR(20) UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Recup
+CREATE DATABASE sistema_login;
+
+USE sistema_login;
+
+-- Tabela de usuários
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE recup (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expiracao DATETIME NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+
+Login
+
+Faltou!
