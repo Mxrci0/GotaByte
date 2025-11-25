@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class Recup
+class RecupModel
 {
     private $rec_id;
     private $fk_usuario_id;

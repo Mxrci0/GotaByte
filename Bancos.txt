@@ -25,18 +25,15 @@ CREATE TABLE necessidades (
 
 Feedback
 
-CREATE TABLE Feedback (
-    nec_id INT AUTO_INCREMENT PRIMARY KEY,
-    nec_tipos VARCHAR(255) NOT NULL,          -- Ex: "Falta de água, Vazamento"
-    nec_descricao TEXT NOT NULL,              -- Descrição “Outros” ou texto composto
-    nec_avaliacao VARCHAR(50) NOT NULL,       -- Desgosto / Gosto / Gosto muito / Outros
-    nec_avaliacao_coment TEXT NULL,           -- comentário quando “Outros”
-    nec_localizacao VARCHAR(255) NULL,
-    nec_status VARCHAR(20) DEFAULT 'pendente', -- pendente / andamento / atendida
-    nec_data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    nec_prazo DATE NULL,                       -- calculado +7 dias
-    nec_relatorio TEXT NULL                    -- quando atendimento finalizado
+CREATE TABLE feedback (
+    fb_id INT AUTO_INCREMENT PRIMARY KEY,
+    fb_nome VARCHAR(150) NOT NULL,
+    fb_email VARCHAR(150) NOT NULL,
+    fb_rating INT NOT NULL,
+    fb_mensagem TEXT NOT NULL,
+    fb_data DATETIME NOT NULL
 );
+
 
 Entrar 
 
