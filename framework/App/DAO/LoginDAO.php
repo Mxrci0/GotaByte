@@ -3,7 +3,7 @@
 namespace App\DAO;
 
 use App\DAO;
-use App\Model\LoginModel;
+use App\Model\UsuarioModel;
 use FW\Controller\FuncoesGlobais;
 
 class UsuarioDAO extends DAO

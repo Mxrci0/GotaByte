@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use FW\Controller\Action;
-use App\DAO\AlunosDAO;
-use App\Model\AlunosModel;
+use App\Model\UsuarioModel;
+use App\DAO\UsuarioDAO;
 
 
 class AlunosController extends Action
@@ -106,42 +106,100 @@ class AlunosController extends Action
         $this->render('login', '');
     }
 
-    public function cadastroPF()
+    public function form_pf()
     {
+        // collect POST safely
+        $name = $_POST['name'] ?? null;
+        $cpf = $_POST['cpf'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $tel = $_POST['tel'] ?? null;
+        $password = $_POST['password'] ?? null;
 
-        var_dump($_POST);
-        exit;
-        /* $nome = $_POST['nome'];
-        $senha = $_POST['senha'];
-        $CPF = $_POST['CPF '];
-        $Email = $_POST['Email'];
-        $NúmerodeFornecimento = $_POST['NúmerodeFornecimento'];
-        $ConfirmarSenha = $_POST['Confirmar Senha'];
-        $NúmerodeCelular = $_POST['Número de Celular'];
-        $CEP = $_POST['CEP'];
-        $Endereço = $_POST['Endereço'];
+        // populate model
+        $form_pf = new form_pfModel();
+        $form_pf->__set('usu_nome', $name);
+        $form_pf->__set('cpf', $cpf);
+        $form_pf->__set('email', $email);
+        $form_pf->__set('tel', $tel);
+        $form_pf->__set('password', $password);
 
-
-        $LoginModel = new LoginModel();
-        $LoginModel->__set('nome', $nome);
-        $LoginModel->__set('CPF', $CPF);
-        $LoginModel->__set('Email', $Email);
-        $LoginModel->__set('NúmerodeFornecimento', $NúmerodeFornecimento);
-        $LoginModel->__set('ConfirmarSenha', $ConfirmarSenha);
-        $LoginModel->__set('NúmerodeCelular', $NúmerodeCelular);
-        $LoginModel->__set('senha', $senha);
-        $LoginModel->__set('CEP', $CEP);
-        $LoginModel->__set('Endereço', $Endereço);
-
-
-        $LoginDAO = new LoginsDAO();
-        if ($LoginDAO->inserir($LoginModel)) {
+        // use DAO to insert the model
+        $form_pf_dao = new form_pfDAO();
+        if ($form_pf_dao->inserir($form_pf)) {
             header('Location:/dashboard/login?success=1');
+            exit;
         } else {
             header('Location:/dashboard/login?error=1');
-        } */
+            exit;
+        }
     }
-    /* public function Modo()
+
+
+    public function form_pj()
+    {
+        // collect POST safely
+        $name = $_POST['name'] ?? null;
+        $razao = $_POST['razao'] ?? null;
+        $cpf = $_POST['cpf'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $tel = $_POST['tel'] ?? null;
+        $password = $_POST['password'] ?? null;
+
+
+        // populate model
+        $form_pf = new form_pjModel();
+        $form_pf->__set('name', $name);
+        $form_pf->__set('razao', $razao);
+        $form_pf->__set('cpf', $cpf);
+         $form_pf->__set('email', $email);
+        $form_pf->__set('tel', $tel);
+        $form_pf->__set('password', $password);
+
+        // use DAO to insert the model
+        $form_pjDAO = new form_pjDAO();
+        if ($form_pjDAO->inserir($form_pf)) {
+            header('Location:/dashboard/login?success=1');
+            exit;
+        } else {
+            header('Location:/dashboard/login?error=1');
+            exit;
+        }
+    }
+
+
+    
+
+    public function form_pre()
+    {
+        // collect POST safely
+        $name = $_POST['namepre'] ?? null;
+        $razao = $_POST['cnpj'] ?? null;
+        $cpf = $_POST['nomeresp'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $tel = $_POST['tel'] ?? null;
+        $password = $_POST['password'] ?? null;
+
+
+        // populate model
+        $form_pf = new form_preModel();
+        $form_pf->__set('namepre', $name);
+        $form_pf->__set('cnpj', $razao);
+        $form_pf->__set('nomeresp', $cpf);
+         $form_pf->__set('email', $email);
+        $form_pf->__set('tel', $tel);
+        $form_pf->__set('password', $password);
+
+        // use DAO to insert the model
+        $form_pjDAO = new form_preDAO();
+        if ($form_pjDAO->inserir($form_pf)) {
+            header('Location:/dashboard/login?success=1');
+            exit;
+        } else {
+            header('Location:/dashboard/login?error=1');
+            exit;
+        }
+    }
+    public function Modo()
     {
 
         $title = "alunos";
@@ -222,5 +280,5 @@ class AlunosController extends Action
         $this->getView()->title_pagina = $title_pagina;
 
         $this->render('necessidades', 'dashboard');
-    } */
+    } 
 }
