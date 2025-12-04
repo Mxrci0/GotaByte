@@ -5,6 +5,12 @@ namespace App\Controller;
 use FW\Controller\Action;
 use App\Model\UsuarioModel;
 use App\DAO\UsuarioDAO;
+use App\Model\form_pfModel;
+use App\Model\form_pjModel;
+use App\Model\form_preModel;
+use App\DAO\form_pfDAO;
+use App\DAO\form_pjDAO;
+use App\DAO\form_preDAO;
 
 
 class AlunosController extends Action
@@ -181,17 +187,17 @@ class AlunosController extends Action
 
 
         // populate model
-        $form_pf = new form_preModel();
-        $form_pf->__set('namepre', $name);
-        $form_pf->__set('cnpj', $razao);
-        $form_pf->__set('nomeresp', $cpf);
-         $form_pf->__set('email', $email);
-        $form_pf->__set('tel', $tel);
-        $form_pf->__set('password', $password);
+        $form_pre = new form_preModel();
+        $form_pre->__set('namepre', $name);
+        $form_pre->__set('cnpj', $razao);
+        $form_pre->__set('nomeresp', $cpf);
+         $form_pre->__set('email', $email);
+        $form_pre->__set('tel', $tel);
+        $form_pre->__set('password', $password);
 
         // use DAO to insert the model
-        $form_pjDAO = new form_preDAO();
-        if ($form_pjDAO->inserir($form_pf)) {
+        $form_preDAO = new form_preDAO();
+        if ($form_preDAO->inserir($form_pre)) {
             header('Location:/dashboard/login?success=1');
             exit;
         } else {

@@ -4,7 +4,8 @@ namespace App\Model;
 
 class form_pfModel
 {
-    private $usu_nome;
+    private $pf_id;
+    private $name;
     private $cpf;
     private $email;
     private $tel;

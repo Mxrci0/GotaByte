@@ -9,19 +9,22 @@ use PDOException;
 
 class form_pfDAO extends DAO
 {
-    public function inserir(form_pfModel $obj)
+    public function inserir($obj)
     {
         try {
+
+            var_dump($obj);
+            exit;
             $sql = "
                 INSERT INTO form_pf 
-                (usu_nome, cpf, email, tel, password)
+                (nome, cpf, email, tel, password)
                 VALUES 
-                (:usu_nome, :cpf, :email, :tel, :password)
+                (:nome, :cpf, :email, :tel, :password)
             ";
 
             $stmt = $this->conn->prepare($sql);
 
-            $stmt->bindValue(':usu_nome', $obj->__get('usu_nome'));
+            $stmt->bindValue(':nome', $obj->__get('nome'));
             $stmt->bindValue(':cpf', $obj->__get('cpf'));
             $stmt->bindValue(':email', $obj->__get('email'));
             $stmt->bindValue(':tel', $obj->__get('tel'));
@@ -33,5 +36,24 @@ class form_pfDAO extends DAO
             error_log("Erro ao inserir PF: " . $e->getMessage());
             return false;
         }
+    }
+
+    public function excluir($obj)
+    {
+        // Implementar método de exclusão
+    }
+
+    public function alterar($obj)
+    {
+        // Implementar método de alteração
+    }
+
+    public function buscarPorId($obj)
+    {
+        // Implementar método de busca por ID
+    }
+    public function listar()
+    {
+        // Implementar método de listagem
     }
 }

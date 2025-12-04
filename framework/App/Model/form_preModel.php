@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class AlunosModel {
+class form_preModel {
 
     private $aln_id;
     private $aln_nome;
