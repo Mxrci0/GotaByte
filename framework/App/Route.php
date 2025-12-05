@@ -18,6 +18,12 @@ class Route extends Boostrap
             'action' => 'error404'
         );
 
+            $routes['form-pj'] = array(
+            'route' => '/inserir/login',
+            'controller' => 'AlunosController',
+            'action' => 'inserir'
+        );
+
 
         $routeManager = RouteManager::getInstance();
         $dbRoutes = $routeManager->getAllRoutes();

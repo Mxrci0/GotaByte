@@ -5,10 +5,10 @@ namespace App\Controller;
 use FW\Controller\Action;
 use App\Model\UsuarioModel;
 use App\DAO\UsuarioDAO;
-use App\Model\form_pfModel;
+use App\Model\Form_PessoaFisicaModel;
 use App\Model\form_pjModel;
 use App\Model\form_preModel;
-use App\DAO\form_pfDAO;
+use App\DAO\Form_PessoaFisicaDAO;
 use App\DAO\form_pjDAO;
 use App\DAO\form_preDAO;
 
@@ -112,99 +112,28 @@ class AlunosController extends Action
         $this->render('login', '');
     }
 
-    public function form_pf()
-    {
-        // collect POST safely
-        $name = $_POST['name'] ?? null;
-        $cpf = $_POST['cpf'] ?? null;
-        $email = $_POST['email'] ?? null;
-        $tel = $_POST['tel'] ?? null;
-        $password = $_POST['password'] ?? null;
-
-        // populate model
-        $form_pf = new form_pfModel();
-        $form_pf->__set('usu_nome', $name);
-        $form_pf->__set('cpf', $cpf);
-        $form_pf->__set('email', $email);
-        $form_pf->__set('tel', $tel);
-        $form_pf->__set('password', $password);
-
-        // use DAO to insert the model
-        $form_pf_dao = new form_pfDAO();
-        if ($form_pf_dao->inserir($form_pf)) {
-            header('Location:/dashboard/login?success=1');
-            exit;
-        } else {
+    public function inserir(){
+        $login = new Form_PessoaFisicaModel();
+        $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
+        if(!isset($_POST['name']) || !isset($_POST['cpf']) || !isset($_POST['email']) || !isset($_POST['tel']) || !isset($_POST['senha'])){
             header('Location:/dashboard/login?error=1');
-            exit;
+            die();
         }
+        $login->__set('name', $_POST['name']);
+        $login->__set('cpf', $_POST['cpf']);
+        $login->__set('email', $_POST['email']);
+        $login->__set('tel', $_POST['tel']);
+        $login->__set('senha', $_POST['senha']);
+
+        $Form_PessoaFisicaDAO->inserir($login);
+        
     }
-
-
-    public function form_pj()
-    {
-        // collect POST safely
-        $name = $_POST['name'] ?? null;
-        $razao = $_POST['razao'] ?? null;
-        $cpf = $_POST['cpf'] ?? null;
-        $email = $_POST['email'] ?? null;
-        $tel = $_POST['tel'] ?? null;
-        $password = $_POST['password'] ?? null;
-
-
-        // populate model
-        $form_pf = new form_pjModel();
-        $form_pf->__set('name', $name);
-        $form_pf->__set('razao', $razao);
-        $form_pf->__set('cpf', $cpf);
-         $form_pf->__set('email', $email);
-        $form_pf->__set('tel', $tel);
-        $form_pf->__set('password', $password);
-
-        // use DAO to insert the model
-        $form_pjDAO = new form_pjDAO();
-        if ($form_pjDAO->inserir($form_pf)) {
-            header('Location:/dashboard/login?success=1');
-            exit;
-        } else {
-            header('Location:/dashboard/login?error=1');
-            exit;
-        }
-    }
-
 
     
 
-    public function form_pre()
-    {
-        // collect POST safely
-        $name = $_POST['namepre'] ?? null;
-        $razao = $_POST['cnpj'] ?? null;
-        $cpf = $_POST['nomeresp'] ?? null;
-        $email = $_POST['email'] ?? null;
-        $tel = $_POST['tel'] ?? null;
-        $password = $_POST['password'] ?? null;
+    
 
-
-        // populate model
-        $form_pre = new form_preModel();
-        $form_pre->__set('namepre', $name);
-        $form_pre->__set('cnpj', $razao);
-        $form_pre->__set('nomeresp', $cpf);
-         $form_pre->__set('email', $email);
-        $form_pre->__set('tel', $tel);
-        $form_pre->__set('password', $password);
-
-        // use DAO to insert the model
-        $form_preDAO = new form_preDAO();
-        if ($form_preDAO->inserir($form_pre)) {
-            header('Location:/dashboard/login?success=1');
-            exit;
-        } else {
-            header('Location:/dashboard/login?error=1');
-            exit;
-        }
-    }
+    
     public function Modo()
     {
 

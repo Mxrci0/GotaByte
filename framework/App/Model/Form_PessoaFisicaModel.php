@@ -2,14 +2,14 @@
 
 namespace App\Model;
 
-class form_pfModel
+class Form_PessoaFisicaModel
 {
     private $pf_id;
     private $name;
     private $cpf;
     private $email;
     private $tel;
-    private $password;
+    private $senha;
 
     public function __get($attr)
     {
