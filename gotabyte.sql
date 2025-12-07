@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 07/12/2025 às 13:00
+-- Tempo de geração: 07/12/2025 às 13:19
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -64,15 +64,15 @@ CREATE TABLE IF NOT EXISTS `form_pessoafisica` (
 DROP TABLE IF EXISTS `routes`;
 CREATE TABLE IF NOT EXISTS `routes` (
   `id` int NOT NULL,
-  `nome_rota` varchar(100) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'O Nome da Rota DEVE ser Unico no Sistema!!! Não pode conter espaços no nome!!\r\n',
-  `slug` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `controller` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `action` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nome_rota` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'O Nome da Rota DEVE ser Unico no Sistema!!! Não pode conter espaços no nome!!\r\n',
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `controller` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `action` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status` tinyint(1) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_dynamic` tinyint(1) DEFAULT '0',
-  `pattern` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `pattern` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -93,6 +93,9 @@ INSERT INTO `routes` (`id`, `nome_rota`, `slug`, `controller`, `action`, `status
 (11, 'Recup', 'recup', 'AlunosController', 'recup', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL),
 (12, 'Relatorio', 'relatorio', 'AlunosController', 'relatorio', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL),
 (13, 'Necessidades', 'necessidades', 'AlunosController', 'necessidades', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL),
+(14, 'form_pf', 'form_pf', 'AlunosController', 'form_pf', 1, '2025-11-10 23:22:26', '2025-11-26 23:09:02', 0, NULL),
+(15, 'form_pj', 'form_pj', 'AlunosController', 'form_pj', 1, '2025-11-10 23:22:26', '2025-11-26 23:09:02', 0, '0'),
+(16, 'form_Pre', 'form_Pre', 'AlunosController', 'form_Pre', 1, '2025-11-10 23:22:26', '2025-12-03 22:22:20', 0, '0'),
 (17, 'Formularios', 'usuarios', 'AlunosController', 'usuarios', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL),
 (18, 'Login-inserir', 'login/inserir', 'AlunosController', 'inserir', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL);
 
@@ -112,6 +115,32 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`usu_id`),
   UNIQUE KEY `usu_email` (`usu_email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura stand-in para view `view`
+-- (Veja abaixo para a visão atual)
+--
+DROP VIEW IF EXISTS `view`;
+CREATE TABLE IF NOT EXISTS `view` (
+`cpf` varchar(14)
+,`email` varchar(150)
+,`name` varchar(150)
+,`pf_id` int
+,`senha` varchar(255)
+,`tel` varchar(20)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para view `view`
+--
+DROP TABLE IF EXISTS `view`;
+
+DROP VIEW IF EXISTS `view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view`  AS SELECT `form_pessoafisica`.`pf_id` AS `pf_id`, `form_pessoafisica`.`name` AS `name`, `form_pessoafisica`.`cpf` AS `cpf`, `form_pessoafisica`.`email` AS `email`, `form_pessoafisica`.`tel` AS `tel`, `form_pessoafisica`.`senha` AS `senha` FROM `form_pessoafisica` ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

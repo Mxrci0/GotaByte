@@ -3,7 +3,7 @@
 namespace App\DAO;
 
 use App\DAO;
-use App\Model\form_pfModel;
+use App\Model\form_pessoafisicaModel;
 use PDO;
 use PDOException;
 
@@ -15,9 +15,9 @@ class Form_PessoaFisicaDAO extends DAO
 
             $sql = "
                 INSERT INTO form_pessoafisica
-                (tipo, name, cpf, email, tel, senha)
+                ( name, cpf, email, tel, senha)
                 VALUES 
-                ('PF', :name, :cpf, :email, :tel, :senha)
+                (:name, :cpf, :email, :tel, :senha)
             ";
 
             $stmt = $this->getConn()->prepare($sql);
@@ -39,7 +39,7 @@ class Form_PessoaFisicaDAO extends DAO
     public function alterar($obj)
     {
         try {
-            $sql = "UPDATE form_pf SET name = :name, cpf = :cpf, email = :email, tel = :tel, senha = :senha WHERE id = :id";
+            $sql = "UPDATE form_pessoafisica SET name = :name, cpf = :cpf, email = :email, tel = :tel, senha = :senha WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':id', $obj->__get('id'));
             $stmt->bindValue(':name', $obj->__get('name '));
@@ -57,7 +57,7 @@ class Form_PessoaFisicaDAO extends DAO
     public function buscarPorId($id)
     {
         try {
-            $sql = "SELECT * FROM form_pf WHERE id = :id";
+            $sql = "SELECT * FROM form_pessoafisica WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
@@ -71,7 +71,7 @@ class Form_PessoaFisicaDAO extends DAO
     public function listar()
     {
         try {
-            $sql = "SELECT * FROM form_pf";
+            $sql = "SELECT * FROM form_pessoafisica";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class Form_PessoaFisicaDAO extends DAO
     public function excluir($id)
     {
         try {
-            $sql = "DELETE FROM form_pf WHERE id = :id";
+            $sql = "DELETE FROM form_pessoafisica WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':id', $id);
             return $stmt->execute();

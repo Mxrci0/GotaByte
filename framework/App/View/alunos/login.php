@@ -82,11 +82,11 @@
             <form action="/login/inserir" method="POST" id="form_pf" class=" space-y-3 border rounded p-4">
                 <h2 class="text-xl font-semibold">Cadastro - Pessoa Física</h2>
 
-                <input type="text" name="name" placeholder="Nome completo" class="w-full p-2 border rounded">
-                <input type="text" name="cpf" placeholder="CPF" class="w-full p-2 border rounded">
-                <input type="email" name="email" placeholder="E-mail" class="w-full p-2 border rounded">
-                <input type="tel" name="tel" placeholder="Telefone" class="w-full p-2 border rounded">
-                <input type="password" name="password" placeholder="Senha" class="w-full p-2 border rounded">
+                <input type="text" name="name" placeholder="Nome completo" class="w-full p-2 border rounded" required>
+                <input type="text" name="cpf" placeholder="CPF" class="w-full p-2 border rounded" required>
+                <input type="email" name="email" placeholder="E-mail" class="w-full p-2 border rounded" required>
+                <input type="tel" name="tel" placeholder="Telefone" class="w-full p-2 border rounded"required>
+                <input type="password" name="password" placeholder="Senha" class="w-full p-2 border rounded" required>
                 <input type="submit" title="Cadastrar" class="block w-full bg-purple-600 text-white p-2 rounded text-center" >
 
             </form>

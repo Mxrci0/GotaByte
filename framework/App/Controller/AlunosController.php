@@ -120,10 +120,10 @@ class AlunosController extends Action
 
         $login = new Form_PessoaFisicaModel();
         $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
-        if(!isset($_POST['name']) || !isset($_POST['cpf']) || !isset($_POST['email']) || !isset($_POST['tel']) || !isset($_POST['password'])){
-            header('Location:/dashboard/login?error=1');
+        /* if($_POST['name'] != "" || $_POST['cpf'] != ""|| $_POST['email'] != "" || $_POST['tel'] != "" || $_POST['password'] != ""){
+            header('Location:/login');
             die();
-        }
+        } */
         $login->__set('name', $_POST['name']);
         $login->__set('cpf', $_POST['cpf']);
         $login->__set('email', $_POST['email']);
@@ -132,8 +132,21 @@ class AlunosController extends Action
 
         /* var_dump($login);
         exit; */
-        $Form_PessoaFisicaDAO->inserir($login);
+       if(!$Form_PessoaFisicaDAO->inserir($login)){
+            header('Location:/entrar');
+            die();
+        } else {
+            header('Location:/login');
+            die();
+        } 
         
+    } 
+    public function excluirpf()
+    {
+        $id = $this->getParams()[0];
+        var_dump($id);
+        exit;
+
     }
 
 
