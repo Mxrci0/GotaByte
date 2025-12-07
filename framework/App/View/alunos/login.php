@@ -73,25 +73,10 @@
     <main class="flex-grow p-6">
         <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
 
-            <h1 class="text-2xl font-bold mb-4">Selecione o Tipo de Conta</h1>
+            <h1 class="text-2xl font-bold mb-4">Faça seu Cadastro</h1>
 
-            <!-- Radios -->
-            <div class="space-y-2 mb-6">
-                <label class="flex items-center gap-2">
-                    <input type="radio" name="tipo" value="pf" onclick="mostrarForm('pf')">
-                    Pessoa Física
-                </label>
-
-                <label class="flex items-center gap-2">
-                    <input type="radio" name="tipo" value="pj" onclick="mostrarForm('pj')">
-                    Pessoa Jurídica
-                </label>
-
-                <label class="flex items-center gap-2">
-                    <input type="radio" name="tipo" value="pref" onclick="mostrarForm('pref')">
-                    Prefeitura
-                </label>
-            </div>
+           
+           
 
             <!-- Form PF -->
             <form action="/login/inserir" method="POST" id="form_pf" class=" space-y-3 border rounded p-4">
@@ -105,41 +90,6 @@
                 <input type="submit" title="Cadastrar" class="block w-full bg-purple-600 text-white p-2 rounded text-center" >
 
             </form>
-
-            <!-- Form PJ -->
-           <!--  <form id="form_pj" class="hidden space-y-3 border rounded p-4">
-                <h2 class="text-xl font-semibold">Cadastro - Pessoa Jurídica</h2>
-
-                <input type="name" placeholder="Razão Social" class="w-full p-2 border rounded">
-                <input type="razao" placeholder="CNPJ" class="w-full p-2 border rounded">
-                <input type="cpf" placeholder="Nome do responsável" class="w-full p-2 border rounded">
-                <input type="email" placeholder="E-mail" class="w-full p-2 border rounded">
-                <input type="tel" placeholder="Telefone" class="w-full p-2 border rounded">
-                <input type="password" placeholder="Senha" class="w-full p-2 border rounded">
-
-                <a href="/" class="block w-full bg-purple-600 text-white p-2 rounded text-center">
-                    Cadastrar
-                </a>
-
-            </form> -->
-
-            <!-- Form Prefeitura -->
-            <!-- <form id="form_pref" class="hidden space-y-3 border rounded p-4">
-                <h2 class="text-xl font-semibold">Cadastro - Prefeitura</h2>
-
-                <input type="namepre" placeholder="Nome da Prefeitura" class="w-full p-2 border rounded">
-                <input type="cnpj" placeholder="CNPJ" class="w-full p-2 border rounded">
-                <input type="nomeresp" placeholder="Nome do responsável" class="w-full p-2 border rounded">
-                <input type="email" placeholder="E-mail institucional" class="w-full p-2 border rounded">
-                <input type="tel" placeholder="Telefone" class="w-full p-2 border rounded">
-                <input type="password" placeholder="Senha" class="w-full p-2 border rounded">
-
-                <a href="/" class="block w-full bg-purple-600 text-white p-2 rounded text-center">
-                    Cadastrar
-                </a>
-
-            </form>
- -->
         </div>
     </main>
 
@@ -172,15 +122,7 @@
         </div>
     </footer>
 
-    <script>
-        function mostrarForm(tipo) {
-            //document.getElementById("form_pf").classList.add("hidden");
-            document.getElementById("form_pj").classList.add("hidden");
-            document.getElementById("form_pref").classList.add("hidden");
-
-            document.getElementById("form_" + tipo).classList.remove("hidden");
-        }
-    </script>
+    
 
 </body>
 

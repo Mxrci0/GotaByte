@@ -50,63 +50,62 @@
       <div class="px-8 py-6">
 
         <!-- FORM COMEÇA AQUI -->
-        <form method="POST" action="">
+       <form method="POST" action="" id="loginForm">
 
-          <!-- Email -->
-          <div id="emailField" class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fas fa-envelope text-gray-400"></i>
-              </div>
-              <input type="email" id="email" name="email"
-                class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
-                placeholder="seu@email.com" required>
-            </div>
-          </div>
+  <!-- Email -->
+  <div id="emailField" class="mb-4">
+    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <i class="fas fa-envelope text-gray-400"></i>
+      </div>
+      <input type="email" id="email" name="email"
+        class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg"
+        placeholder="seu@email.com" required>
+    </div>
+  </div>
 
-          <!-- Telefone -->
-          <div id="phoneField" class="mb-4 hidden">
-            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Número de telefone</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fas fa-phone text-gray-400"></i>
-              </div>
-              <input type="tel" id="phone" name="phone"
-                class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
-                placeholder="(00) 00000-0000">
-            </div>
-          </div>
+  <!-- Telefone -->
+  <div id="phoneField" class="mb-4 hidden">
+    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Número de telefone</label>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <i class="fas fa-phone text-gray-400"></i>
+      </div>
+      <input type="tel" id="phone" name="phone"
+        class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg"
+        placeholder="(00) 00000-0000">
+    </div>
+  </div>
 
-          <!-- Senha -->
-          <div class="mb-4">
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fas fa-lock text-gray-400"></i>
-              </div>
-              <input type="password" id="password" name="password"
-                class="input-focus w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
-                placeholder="••••••••" required>
-              <button type="button" id="togglePassword" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-          </div>
+  <!-- Senha -->
+  <div class="mb-4">
+    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <i class="fas fa-lock text-gray-400"></i>
+      </div>
+      <input type="password" id="password" name="password"
+        class="input-focus w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg"
+        placeholder="••••••••" required>
+      <button type="button" id="togglePassword" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600">
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+  </div>
 
-          <!-- Botão Entrar -->
-          <button type="submit"
-            class="w-full bg-gradient-custom text-white py-2 px-4 rounded-lg font-medium hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Entrar
-          </button>
+  <!-- Botão Entrar -->
+  <button type="submit"
+    class="w-full bg-gradient-custom text-white py-2 px-4 rounded-lg font-medium hover:opacity-90 transition">
+    Entrar
+  </button>
 
-        </form>
-        <!-- FORM TERMINA AQUI -->
+</form>
+
 
       </div>
     </div>
-  </div>
-<  
+  </div>  
 
 
           <!-- Link Cadastro -->
