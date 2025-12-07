@@ -2,13 +2,13 @@
 
 namespace App\Model;
 
-class RecupModel
+class UsuariosModel
 {
-    private $rec_id;
-    private $fk_usuario_id;
-    private $rec_token;
-    private $rec_expiracao;
-    private $rec_criado_em;
+    private $usu_id;
+    private $usu_email;
+    private $usu_phone;
+    private $usu_password;
+    private $usu_data;
 
     public function __set($nome, $valor)
     {

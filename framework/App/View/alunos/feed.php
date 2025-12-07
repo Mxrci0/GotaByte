@@ -80,37 +80,37 @@
 <body>
     <section class="feedback-section">
         <h2>Deixe seu Feedback</h2>
-        
-        <form class="feedback-form" id="feedbackForm">
-            <div class="form-group">
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="rating">Avaliação:</label>
-                <select id="rating" name="rating" required>
-                    <option value="">Selecione...</option>
-                    <option value="5">Excelente - 5 estrelas</option>
-                    <option value="4">Muito bom - 4 estrelas</option>
-                    <option value="3">Bom - 3 estrelas</option>
-                    <option value="2">Regular - 2 estrelas</option>
-                    <option value="1">Ruim - 1 estrela</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="message">Mensagem:</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            
-            <button type="submit">Enviar Feedback</button>
-        </form>
+       <form class="feedback-form" id="feedbackForm" method="POST" action="">
+    <div class="form-group">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="rating">Avaliação:</label>
+        <select id="rating" name="rating" required>
+            <option value="">Selecione...</option>
+            <option value="5">Excelente - 5 estrelas</option>
+            <option value="4">Muito bom - 4 estrelas</option>
+            <option value="3">Bom - 3 estrelas</option>
+            <option value="2">Regular - 2 estrelas</option>
+            <option value="1">Ruim - 1 estrela</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="message">Mensagem:</label>
+        <textarea id="message" name="message" required></textarea>
+    </div>
+    
+    <button type="submit">Enviar Feedback</button>
+</form>
+
         
         <div class="feedback-list" id="feedbackList">
             <!-- Feedbacks serão exibidos aqui -->

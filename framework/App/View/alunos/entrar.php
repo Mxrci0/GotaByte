@@ -39,89 +39,81 @@
 
 
   <!-- Formulário -->
-  <main class="flex-grow flex items-center justify-center p-4">
-    <div class="w-full max-w-md">
-      <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
-        <div class="bg-gradient-custom py-6 px-8 text-center">
-          <h1 class="text-2xl font-bold text-white">Bem-vindo de volta</h1>
-          <p class="text-white opacity-90 mt-1">Faça login para acessar sua conta</p>
-        </div>
+<main class="flex-grow flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+      <div class="bg-gradient-custom py-6 px-8 text-center">
+        <h1 class="text-2xl font-bold text-white">Bem-vindo de volta</h1>
+        <p class="text-white opacity-90 mt-1">Faça login para acessar sua conta</p>
+      </div>
 
-        <div class="px-8 py-6">
-          <form id="loginForm">
-            <!-- Alternar entre email e telefone -->
-            <div class="flex items-center justify-center mb-6">
-              <span class="text-sm font-medium mr-3">Email</span>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="loginMethodToggle" class="toggle-input sr-only" />
-                <div class="toggle-slider w-11 h-6 bg-gray-200 rounded-full transition before:absolute before:h-5 before:w-5 before:bg-white before:rounded-full before:transition-transform before:transform before:translate-x-1"></div>
-              </label>
-              <span class="text-sm font-medium ml-3">Telefone</span>
-            </div>
+      <div class="px-8 py-6">
 
-            <!-- Email -->
-            <div id="emailField" class="mb-4">
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <i class="fas fa-envelope text-gray-400"></i>
-                </div>
-                <input type="email" id="email" name="email"
-                  class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
-                  placeholder="seu@email.com" required>
+        <!-- FORM COMEÇA AQUI -->
+        <form method="POST" action="">
+
+          <!-- Email -->
+          <div id="emailField" class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-envelope text-gray-400"></i>
               </div>
+              <input type="email" id="email" name="email"
+                class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
+                placeholder="seu@email.com" required>
             </div>
+          </div>
 
-            <!-- Telefone -->
-            <div id="phoneField" class="mb-4 hidden">
-              <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Número de telefone</label>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <i class="fas fa-phone text-gray-400"></i>
-                </div>
-                <input type="tel" id="phone" name="phone"
-                  class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
-                  placeholder="(00) 00000-0000">
+          <!-- Telefone -->
+          <div id="phoneField" class="mb-4 hidden">
+            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Número de telefone</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-phone text-gray-400"></i>
               </div>
+              <input type="tel" id="phone" name="phone"
+                class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
+                placeholder="(00) 00000-0000">
             </div>
+          </div>
 
-            <!-- Senha -->
-            <div class="mb-4">
-              <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <i class="fas fa-lock text-gray-400"></i>
-                </div>
-                <input type="password" id="password" name="password"
-                  class="input-focus w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
-                  placeholder="••••••••" required>
-                <button type="button" id="togglePassword" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600">
-                  <i class="fas fa-eye"></i>
-                </button>
+          <!-- Senha -->
+          <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-lock text-gray-400"></i>
               </div>
+              <input type="password" id="password" name="password"
+                class="input-focus w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
+                placeholder="••••••••" required>
+              <button type="button" id="togglePassword" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-eye"></i>
+              </button>
             </div>
+          </div>
 
-            <!-- Lembrar e Esqueceu -->
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center">
-                <input id="remember" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                <label for="remember" class="ml-2 block text-sm text-gray-700">Lembrar-me</label>
-              </div>
-              <a href="/recup" class="text-sm text-indigo-600 hover:text-indigo-500">Esqueceu a senha?</a>
-            </div>
+          <!-- Botão Entrar -->
+          <button type="submit"
+            class="w-full bg-gradient-custom text-white py-2 px-4 rounded-lg font-medium hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Entrar
+          </button>
 
-            <!-- Botão Entrar -->
-            <button type="submit"
-              class="w-full bg-gradient-custom text-white py-2 px-4 rounded-lg font-medium hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Entrar
-            </button>
-          </form>
+        </form>
+        <!-- FORM TERMINA AQUI -->
+
+      </div>
+    </div>
+  </div>
+<  
+
 
           <!-- Link Cadastro -->
           <div class="mt-6 text-center">
             <p class="text-sm text-gray-600">
               Não tem uma conta?
-              <a href="login.html" class="text-indigo-600 hover:text-indigo-500 font-medium">Cadastre-se</a>
+              <a href="/cadastro" class="text-indigo-600 hover:text-indigo-500 font-medium">Cadastre-se</a>
             </p>
           </div>
         </div>
@@ -139,20 +131,7 @@
       const togglePassword = document.getElementById('togglePassword');
       const phoneInput = document.getElementById('phone');
 
-      // Alternar entre email e telefone
-      loginMethodToggle.addEventListener('change', function () {
-        if (this.checked) {
-          emailField.classList.add('hidden');
-          phoneField.classList.remove('hidden');
-          document.getElementById('email').removeAttribute('required');
-          phoneInput.setAttribute('required', '');
-        } else {
-          emailField.classList.remove('hidden');
-          phoneField.classList.add('hidden');
-          document.getElementById('email').setAttribute('required', '');
-          phoneInput.removeAttribute('required');
-        }
-      });
+     
 
       // Mostrar/ocultar senha
       togglePassword.addEventListener('click', () => {

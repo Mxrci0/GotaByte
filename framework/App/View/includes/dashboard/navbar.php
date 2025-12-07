@@ -18,11 +18,7 @@
             <a href="/ajuda" class="nav-link">Ajuda</a>
             <a href="/relatorio" class="nav-link">Historico</a>
             <a href="/dicas" class="nav-link">Dicas</a>
-            
             <a href="/modo" class="block nav-link">Alerta</a>
-            <a href="/necessidades" class="nav-link">Forum</a>
-           
-            <a href="/perfil" class="nav-link"><i class="fas fa-user mr-1"></i> Perfil</a>
             <a href="/entrar" class="nav-link"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
             <a href="/login" class="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700">
                 <i class="fas fa-user-plus mr-1"></i> Cadastro

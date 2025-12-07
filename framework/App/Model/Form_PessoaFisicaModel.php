@@ -11,7 +11,7 @@ class Form_PessoaFisicaModel
     private $tel;
     private $senha;
 
-    public function __get($attr)
+    public function __get($attr)    
     {
         return $this->$attr ?? null;
     }

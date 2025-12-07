@@ -112,7 +112,10 @@ class AlunosController extends Action
         $this->render('login', '');
     }
 
-    public function inserir(){
+   
+   public function inserir(){
+     var_dump($_POST);
+die();
         $login = new Form_PessoaFisicaModel();
         $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
         if(!isset($_POST['name']) || !isset($_POST['cpf']) || !isset($_POST['email']) || !isset($_POST['tel']) || !isset($_POST['senha'])){
@@ -129,7 +132,6 @@ class AlunosController extends Action
         
     }
 
-    
 
     
 
@@ -203,7 +205,7 @@ class AlunosController extends Action
         $this->render('Relatorio', 'dashboard');
     }
 
-    public function Necessidades()
+  /*  public function Necessidades()
     {
 
         $title = "alunos";
@@ -215,5 +217,5 @@ class AlunosController extends Action
         $this->getView()->title_pagina = $title_pagina;
 
         $this->render('necessidades', 'dashboard');
-    } 
+    } */
 }
