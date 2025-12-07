@@ -112,13 +112,15 @@ class AlunosController extends Action
         $this->render('login', '');
     }
 
-   
-   public function inserir(){
-     var_dump($_POST);
-die();
+
+    public function inserir(){
+        /* var_dump($_POST);
+        exit; */
+
+
         $login = new Form_PessoaFisicaModel();
         $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
-        if(!isset($_POST['name']) || !isset($_POST['cpf']) || !isset($_POST['email']) || !isset($_POST['tel']) || !isset($_POST['senha'])){
+        if(!isset($_POST['name']) || !isset($_POST['cpf']) || !isset($_POST['email']) || !isset($_POST['tel']) || !isset($_POST['password'])){
             header('Location:/dashboard/login?error=1');
             die();
         }
@@ -126,8 +128,10 @@ die();
         $login->__set('cpf', $_POST['cpf']);
         $login->__set('email', $_POST['email']);
         $login->__set('tel', $_POST['tel']);
-        $login->__set('senha', $_POST['senha']);
+        $login->__set('senha', $_POST['password']);
 
+        /* var_dump($login);
+        exit; */
         $Form_PessoaFisicaDAO->inserir($login);
         
     }

@@ -94,23 +94,20 @@
             </div>
 
             <!-- Form PF -->
-            <form id="form_pf" class="hidden space-y-3 border rounded p-4">
+            <form action="/login/inserir" method="POST" id="form_pf" class=" space-y-3 border rounded p-4">
                 <h2 class="text-xl font-semibold">Cadastro - Pessoa Física</h2>
 
-                <input type="name" placeholder="Nome completo" class="w-full p-2 border rounded">
-                <input type="cpf" placeholder="CPF" class="w-full p-2 border rounded">
-                <input type="email" placeholder="E-mail" class="w-full p-2 border rounded">
-                <input type="tel" placeholder="Telefone" class="w-full p-2 border rounded">
-                <input type="password" placeholder="Senha" class="w-full p-2 border rounded">
-
-                <a href="/" class="block w-full bg-purple-600 text-white p-2 rounded text-center">
-                    Cadastrar
-                </a>
+                <input type="text" name="name" placeholder="Nome completo" class="w-full p-2 border rounded">
+                <input type="text" name="cpf" placeholder="CPF" class="w-full p-2 border rounded">
+                <input type="email" name="email" placeholder="E-mail" class="w-full p-2 border rounded">
+                <input type="tel" name="tel" placeholder="Telefone" class="w-full p-2 border rounded">
+                <input type="password" name="password" placeholder="Senha" class="w-full p-2 border rounded">
+                <input type="submit" title="Cadastrar" class="block w-full bg-purple-600 text-white p-2 rounded text-center" >
 
             </form>
 
             <!-- Form PJ -->
-            <form id="form_pj" class="hidden space-y-3 border rounded p-4">
+           <!--  <form id="form_pj" class="hidden space-y-3 border rounded p-4">
                 <h2 class="text-xl font-semibold">Cadastro - Pessoa Jurídica</h2>
 
                 <input type="name" placeholder="Razão Social" class="w-full p-2 border rounded">
@@ -124,10 +121,10 @@
                     Cadastrar
                 </a>
 
-            </form>
+            </form> -->
 
             <!-- Form Prefeitura -->
-            <form id="form_pref" class="hidden space-y-3 border rounded p-4">
+            <!-- <form id="form_pref" class="hidden space-y-3 border rounded p-4">
                 <h2 class="text-xl font-semibold">Cadastro - Prefeitura</h2>
 
                 <input type="namepre" placeholder="Nome da Prefeitura" class="w-full p-2 border rounded">
@@ -142,7 +139,7 @@
                 </a>
 
             </form>
-
+ -->
         </div>
     </main>
 
@@ -177,7 +174,7 @@
 
     <script>
         function mostrarForm(tipo) {
-            document.getElementById("form_pf").classList.add("hidden");
+            //document.getElementById("form_pf").classList.add("hidden");
             document.getElementById("form_pj").classList.add("hidden");
             document.getElementById("form_pref").classList.add("hidden");
 
