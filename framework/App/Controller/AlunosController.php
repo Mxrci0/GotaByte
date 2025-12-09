@@ -95,8 +95,11 @@ class AlunosController extends Action
 
         $this->render('feed', 'dashboard');
     }
+      
 
-    public function validaAutenticacao() {}
+    public function validaAutenticacao() {
+        
+    }
 
     public function login()
     {
@@ -139,13 +142,53 @@ class AlunosController extends Action
             header('Location:/login');
             die();
         } 
+        header ("Location:/login/listar");
         
     } 
+
+    Public function listarpf(){
+
+        $title = "Listagem PF";
+        $this->getView()->title = $title;
+        
+        
+        $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
+        $login = $Form_PessoaFisicaDAO -> listar();
+        $this->getView()->login = $login;
+        $this->render('listar', 'dashboard');
+
+    }
+
+    public function editarPf(){
+      /*  var_dump($this->getParams()[0]);
+        exit; */ 
+        $login = new Form_PessoaFisicaModel();
+        $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
+        
+      /*   if(isset($this->getParams()[0])) {*/
+            $login = $Form_PessoaFisicaDAO->buscarPorId($this->getParams()[0]);
+            
+            $this->getView()->login = $login;
+        /* }else{
+            $this->getView()->login = '';
+        } */
+
+        $title = "Editar PF";
+        $this->getView()->title = $title;
+        
+
+        $this->render('editar', '');
+
+    }
+
+
     public function excluirpf()
     {
-        $id = $this->getParams()[0];
-        var_dump($id);
-        exit;
+        $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
+        if(isset($this->getParams()[0])){
+            $Form_PessoaFisicaDAO->excluir($this->getParams()[0]);
+        }
+        header("Location:/login/listar");
 
     }
 
