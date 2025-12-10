@@ -80,7 +80,7 @@
            
 
             <!-- Form PF -->
-            <form action="/login/atulizar" method="POST" id="form_pf" class=" space-y-3 border rounded p-4">
+            <form action="/login/alterar" method="POST" id="form_pf" class=" space-y-3 border rounded p-4">
                 <h2 class="text-xl font-semibold">Cadastro - Pessoa Física</h2>
 
                 <input type="text" name="name" placeholder="Nome completo" value="<?= $this->getView()->login->__get('name') ?>" class="w-full p-2 border rounded" required>
@@ -89,7 +89,7 @@
                 <input type="tel" name="tel" placeholder="Telefone" value="<?= $this->getView()->login->__get('tel') ?>" class="w-full p-2 border rounded"required>
                 <input type="password" name="senha" placeholder="Senha" value="<?= $this->getView()->login->__get('senha') ?>" class="w-full p-2 border rounded" required>
                <input type="hidden" name="pf_id" value="<?= $this->getView()->login->__get('pf_id') ?>" >
-                <input type="submit" title="Cadastrar" class="block w-full bg-purple-600 text-white p-2 rounded text-center" >
+                <input type="submit" title="Alterar Cadastro" class="block w-full bg-purple-600 text-white p-2 rounded text-center" >
 
             </form>
         </div>

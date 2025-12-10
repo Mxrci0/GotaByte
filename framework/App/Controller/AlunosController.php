@@ -180,7 +180,21 @@ class AlunosController extends Action
         $this->render('editar', '');
 
     }
+        public function alterarpf(){
+            $login = new Form_PessoaFisicaModel();
+            $Form_PessoaFisicaDAO = new Form_PessoaFisicaDAO();
 
+            $login->__set('pf_id', $_POST['pf_id']);
+            $login->__set('name', $_POST['name']);
+            $login->__set('cpf', $_POST['cpf']);
+            $login->__set('email', $_POST['email']);
+            $login->__set('tel', $_POST['tel']);
+            $login->__set('senha', $_POST['senha']);
+
+            $Form_PessoaFisicaDAO->alterar($login);
+            header("Location: /login/listar");
+            
+        }
 
     public function excluirpf()
     {

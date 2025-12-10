@@ -35,24 +35,7 @@ class Form_PessoaFisicaDAO extends DAO
     }
 
 
-    public function alterar($obj)
-    {
-        try {
-            $sql = "UPDATE form_pessoafisica SET name = :name, cpf = :cpf, email = :email, tel = :tel, senha = :senha WHERE id = :id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':id', $obj->__get('id'));
-            $stmt->bindValue(':name', $obj->__get('name '));
-            $stmt->bindValue(':cpf', $obj->__get('cpf'));
-            $stmt->bindValue(':email', $obj->__get('email'));
-            $stmt->bindValue(':tel', $obj->__get('tel'));
-            $stmt->bindValue(':senha', password_hash($obj->__get('senha'), PASSWORD_DEFAULT));
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Erro ao alterar PF: " . $e->getMessage());
-            return false;
-        }
-    }
-
+        
     public function buscarPorId($pf_id)
     {
         try {
@@ -110,6 +93,46 @@ class Form_PessoaFisicaDAO extends DAO
         }
     }
 
+   
+    public function alterar($var)
+    {
+       /*  var_dump("TESTE");
+        exit; */
+         try {
+            $sql = "UPDATE form_pessoafisica
+            SET 
+                 name = :name, 
+                  cpf = :cpf,
+                email = :email,
+                tel = :tel,
+                senha = :senha
+
+            WHERE pf_id = :pf_id ";
+
+            $stmt = $this->getConn()->prepare($sql);
+
+            $pf_id= $var-> __get('pf_id');
+            $name = $var-> __get('name');
+            $cpf = $var-> __get('cpf');
+            $email = $var-> __get('email');
+            $tel = $var-> __get('tel');
+            $senha = $var-> __get('senha');
+
+            
+            
+            $stmt->bindParam(':pf_id', $pf_id);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':cpf', $cpf);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':tel', $tel);
+            $stmt->bindParam(':senha', $senha);
+                
+            $stmt->execute();
+        } catch (\PDOException $ex) {
+            header("Location: /error101");
+            die;
+        } 
+    }
     public function excluir($pf_id)
     {
         try {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 09/12/2025 às 00:26
+-- Tempo de geração: 10/12/2025 às 00:58
 -- Versão do servidor: 9.1.0
 -- Versão do PHP: 8.3.14
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `form_pessoafisica` (
 --
 
 INSERT INTO `form_pessoafisica` (`pf_id`, `name`, `cpf`, `email`, `tel`, `senha`) VALUES
-(3, '231', '123456789', 'juniorpires8969@3.c1313om', '19995585892', '$2y$10$yrCX4y4sL0Kkue6m5Rm0IeePLCETO585B79YI1rDQFNk4lxSVd8b2');
+(3, '231112', '123456789', 'juniorpires8969@3.c1313omaa', '19995585892', '$2y$10$yrCX4y4sL0Kkue6m5Rm0IeePLCETO585B79YI1rDQFNk4lxSVd8b2');
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `routes` (
   `is_dynamic` tinyint(1) DEFAULT '0',
   `pattern` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `routes`
@@ -91,7 +91,8 @@ INSERT INTO `routes` (`id`, `nome_rota`, `slug`, `controller`, `action`, `status
 (18, 'Login-inserir', 'login/inserir', 'AlunosController', 'inserir', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL),
 (19, 'excluirpf', 'cadastros/excluir/pessoafisica/{id}', 'AlunosController', 'excluirpf', 1, '2025-12-07 18:37:37', '2025-12-07 18:45:38', 1, 'cadastros/excluir/pessoafisica/{id}'),
 (20, 'Login-listar', 'login/listar', 'AlunosController', 'listarpf', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL),
-(21, 'Login-editar', 'login/editar/pessoafisica/{id}', 'AlunosController', 'editarPf', 1, '2025-11-10 23:22:26', '2025-12-08 23:58:22', 1, 'login/editar/pessoafisica/{id}');
+(21, 'Login-editar', 'login/editar/pessoafisica/{id}', 'AlunosController', 'editarPf', 1, '2025-11-10 23:22:26', '2025-12-08 23:58:22', 1, 'login/editar/pessoafisica/{id}'),
+(22, 'Login-alterar', 'login/alterar', 'AlunosController', 'alterarpf', 1, '2025-11-10 23:22:26', '2025-12-10 00:45:15', 0, NULL);
 
 -- --------------------------------------------------------
 
