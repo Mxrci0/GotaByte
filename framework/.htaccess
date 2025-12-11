@@ -1,6 +1,14 @@
-RewriteEngine On
+<IfModule mod_rewrite.c>
+    # 1. Ligar o motor de reescrita
+    RewriteEngine On
+    
+    # 2. Se a requisição NÃO for um arquivo existente
+    RewriteCond %{REQUEST_FILENAME} !-f
+    
+    # 3. E se a requisição NÃO for um diretório existente (CORREÇÃO CRÍTICA)
+    RewriteCond %{REQUEST_FILENAME} !-d 
+    
+    # 4. Redireciona toda a URL restante para o index.php
+    RewriteRule ^(.*)$ index.php [QSA,L] 
+</IfModule>
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [QSA,L]
-
-php_value variables_order EGPCS

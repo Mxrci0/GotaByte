@@ -20,39 +20,57 @@ abstract class Boostrap {
     }       
     
     protected function run($url) {
+
         $rotaValida = false;
+
+        // Remove barra inicial para padronização
+        $url = trim($url, '/');
         
         foreach ($this->getRoutes() as $key => $route) {
-            // Verifica se é uma rota dinâmica (com parâmetros)
+
+            // Rota dinâmica
             if (isset($route['is_dynamic']) && $route['is_dynamic']) {
+
                 $matches = [];
+
                 if ($this->matchDynamicRoute($url, $route['pattern'], $matches)) {
+                    
+                    $params = $this->getNamedParams($matches);
                     $class = "App\\Controller\\" . $route['controller'];
                     $controller = new $class();
                     $action = $route['action'];
-                    $controller->$action($matches);
+
+                    $controller->$action($params);
+
                     $rotaValida = true;
                     break;
                 }
+
             } else {
-                // Rota estática normal
-                if ($this->matchStaticRoute($url, $route['route'])) {
+
+                // Rota estática
+                $rota = trim($route['route'], '/');
+
+                if ($this->matchStaticRoute($url, $rota)) {
+                    
+                    $params = $this->getParams($url, $rota);
+
                     $class = "App\\Controller\\" . $route['controller'];
                     $controller = new $class();
                     $action = $route['action'];
-                    $params = $this->getParams($url, $route['route']);
+
                     $controller->$action($params);
+
                     $rotaValida = true;
                     break;
                 }
             }
         }
         
-        if(!$rotaValida) {
+        if (!$rotaValida) {
             $class = "App\\Controller\\ErrorController";
             $controller = new $class();                    
-            $action = "error404";
-            $controller->$action();
+            $controller->error404();
         }
     }
 
@@ -62,34 +80,26 @@ abstract class Boostrap {
             
     abstract protected function initRoutes();
 
-    /**
-     * Verifica se a URL corresponde a uma rota estática
-     */
+
+    /** ROTA ESTÁTICA */
     protected function matchStaticRoute($url, $route) {
         return rtrim($url, '/') === rtrim($route, '/');
     }
 
-    /**
-     * Verifica se a URL corresponde a uma rota dinâmica e captura os parâmetros
-     */
+
+    /** ROTA DINÂMICA */
     protected function matchDynamicRoute($url, $pattern, &$matches) {
-        // Converte o padrão (ex: "empresa/{id}") para regex
         $regex = $this->convertPatternToRegex($pattern);
-        return preg_match($regex, trim($url, '/'), $matches);
+        return preg_match($regex, $url, $matches);
     }
 
-    /**
-     * Converte padrão de rota dinâmica para expressão regular
-     */
     protected function convertPatternToRegex($pattern) {
+        $pattern = trim($pattern, '/');
         $pattern = str_replace('/', '\/', $pattern);
         $regex = preg_replace('/\{([a-zA-Z_]+)\}/', '(?P<$1>[^\/]+)', $pattern);
         return '/^' . $regex . '$/';
     }
 
-    /**
-     * Extrai parâmetros nomeados dos matches da regex
-     */
     protected function getNamedParams($matches) {
         $params = [];
         foreach ($matches as $key => $value) {
@@ -100,10 +110,10 @@ abstract class Boostrap {
         return $params;
     }
 
-    /**
-     * Obtém parâmetros para rotas estáticas (mantido para compatibilidade)
-     */
+    
+    /** PARÂMETROS EM ROTAS ESTÁTICAS QUE TÊM {param} */
     protected function getParams($url, $route) {
+
         if (strpos($route, '{') === false) {
             return null;
         }
@@ -115,6 +125,7 @@ abstract class Boostrap {
         for ($i = 0; $i < count($routeParts); $i++) {
             if (isset($routeParts[$i]) && strpos($routeParts[$i], '{') !== false && 
                 isset($urlParts[$i]) && strlen($urlParts[$i]) > 0) {
+                    
                 $paramName = trim($routeParts[$i], '{}');
                 $params[$paramName] = $urlParts[$i];
             }
