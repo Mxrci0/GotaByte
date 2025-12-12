@@ -191,7 +191,7 @@ class AlunosController extends Action
      * Rota de formulário GET: /feedback/novo -> AlunosController@formFeedback
      * Este método renderiza o formulário HTML para o usuário.
      */
-    public function formFeedback()
+    /* public function formFeedback()
     {
         $title = "Novo Feedback";
         $this->getView()->title = $title;
@@ -199,18 +199,38 @@ class AlunosController extends Action
         // CORREÇÃO APLICADA: Renderiza a view 'fb_inserir' na pasta 'alunos'
         $this->render('fb_inserir', 'dashboard');
     }
-
+ */
 
     /**
      * Método para processar a submissão de um novo feedback (POST)
      * Rota: /feedback/inserir -> AlunosController@inserirFeedback
      */
-    public function inserirFeedback()
+    public function inserirfeed()
     {
-        // Verifica se os dados foram enviados por POST
+        $feed = new FeedbackModel();
+        $feedbackDAO = new FeedbackDAO();
+
+        $feed -> __set('fb_id', $_POST['fb_id']);
+        $feed -> __set('name', $_POST['fb_nome']);
+        $feed -> __set('email', $_POST['fb_email']);
+        $feed -> __set('rating', $_POST['fb_rating']);
+        $feed -> __set('message', $_POST['fb_mensagem']);
+        $feed -> __set('fb_data', date('Y-m-d H:i:s'));
+
+        if(!$feedbackDAO -> inserir($feed)){
+            header('Location:/feed');
+            die();
+        } else {
+            header('Location:/feed');
+            die();
+        }
+
+        
+    }
+       /*  // Verifica se os dados foram enviados por POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
-            $feedback = new FeedbackModel();
+            $feed = new FeedbackModel();
             $feedbackDAO = new FeedbackDAO();
 
             // 1. Coleta e sanitização dos dados (AJUSTE OS NOMES DOS CAMPOS POST CONFORME SEU FORMULÁRIO)
@@ -220,15 +240,15 @@ class AlunosController extends Action
             $fb_mensagem = $_POST['fb_mensagem'] ?? '';
             
             // 2. Popula o modelo
-            $feedback->__set('fb_nome', $fb_nome);
-            $feedback->__set('fb_email', $fb_email);
-            $feedback->__set('fb_rating', $fb_rating);
-            $feedback->__set('fb_mensagem', $fb_mensagem);
+            $feed->__set('fb_nome', $fb_nome);
+            $feed->__set('fb_email', $fb_email);
+            $feed->__set('fb_rating', $fb_rating);
+            $feed->__set('fb_mensagem', $fb_mensagem);
 
             try {
                 // 3. Insere no banco de dados
-                $feedbackDAO->inserir($feedback);
-                
+                $feedbackDAO->inserir($feed);
+                ,
                 // Redireciona para uma página de sucesso ou volta para a lista
                 header('Location: /feedback/listar?success=1');
                 die();
@@ -242,7 +262,7 @@ class AlunosController extends Action
             header('Location: /feedback/novo'); 
             die();
         }
-    }
+    } */
 
 
     /**
