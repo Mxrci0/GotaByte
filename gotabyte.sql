@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Tempo de geração: 10/12/2025 às 00:58
--- Versão do servidor: 9.1.0
--- Versão do PHP: 8.3.14
+-- Host: localhost
+-- Tempo de geração: 12/12/2025 às 02:14
+-- Versão do servidor: 8.4.7
+-- Versão do PHP: 8.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,19 +24,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `fb_id` int NOT NULL,
+  `fb_nome` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fb_email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fb_rating` tinyint(1) NOT NULL,
+  `fb_mensagem` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fb_data` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `form_pessoafisica`
 --
 
-DROP TABLE IF EXISTS `form_pessoafisica`;
-CREATE TABLE IF NOT EXISTS `form_pessoafisica` (
-  `pf_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `form_pessoafisica` (
+  `pf_id` int NOT NULL,
   `name` varchar(150) NOT NULL,
   `cpf` varchar(14) NOT NULL,
   `email` varchar(150) NOT NULL,
   `tel` varchar(20) DEFAULT NULL,
-  `senha` varchar(255) NOT NULL,
-  PRIMARY KEY (`pf_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `senha` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `form_pessoafisica`
@@ -51,9 +64,8 @@ INSERT INTO `form_pessoafisica` (`pf_id`, `name`, `cpf`, `email`, `tel`, `senha`
 -- Estrutura para tabela `routes`
 --
 
-DROP TABLE IF EXISTS `routes`;
-CREATE TABLE IF NOT EXISTS `routes` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `routes` (
+  `id` int NOT NULL,
   `nome_rota` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'O Nome da Rota DEVE ser Unico no Sistema!!! Não pode conter espaços no nome!!\r\n',
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `controller` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -62,9 +74,8 @@ CREATE TABLE IF NOT EXISTS `routes` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_dynamic` tinyint(1) DEFAULT '0',
-  `pattern` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `pattern` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `routes`
@@ -92,7 +103,14 @@ INSERT INTO `routes` (`id`, `nome_rota`, `slug`, `controller`, `action`, `status
 (19, 'excluirpf', 'cadastros/excluir/pessoafisica/{id}', 'AlunosController', 'excluirpf', 1, '2025-12-07 18:37:37', '2025-12-07 18:45:38', 1, 'cadastros/excluir/pessoafisica/{id}'),
 (20, 'Login-listar', 'login/listar', 'AlunosController', 'listarpf', 1, '2025-11-10 23:22:26', '2025-11-10 23:22:26', 0, NULL),
 (21, 'Login-editar', 'login/editar/pessoafisica/{id}', 'AlunosController', 'editarPf', 1, '2025-11-10 23:22:26', '2025-12-08 23:58:22', 1, 'login/editar/pessoafisica/{id}'),
-(22, 'Login-alterar', 'login/alterar', 'AlunosController', 'alterarpf', 1, '2025-11-10 23:22:26', '2025-12-10 00:45:15', 0, NULL);
+(22, 'Login-alterar', 'login/alterar', 'AlunosController', 'alterarpf', 1, '2025-11-10 23:22:26', '2025-12-10 00:45:15', 0, NULL),
+(23, 'Feedback-Inserir', 'feedback/inserir', 'AlunosController', 'inserirFeedback', 1, '2025-12-11 17:33:43', '2025-12-11 17:37:11', 0, NULL),
+(24, 'Feedback-Consultar', 'feedback/consultar/{id}', 'AlunosController', 'buscarFeedbackPorId', 1, '2025-12-11 17:33:43', '2025-12-11 17:37:11', 1, 'feedback/consultar/{id}'),
+(25, 'Feedback-Excluir', 'feedback/excluir/{id}', 'AlunosController', 'excluirFeedback', 1, '2025-12-11 17:33:43', '2025-12-11 17:37:12', 1, 'feedback/excluir/{id}'),
+(26, 'Feedback-Listar', 'feedback/listar', 'AlunosController', 'listarFeedback', 1, '2025-12-11 17:37:12', '2025-12-11 17:37:12', 0, NULL),
+(27, 'Feedback-Listar', 'feedback/listar', 'AlunosController', 'listarFeedback', 1, '2025-12-11 17:37:59', '2025-12-11 17:37:59', 0, NULL),
+(28, 'Feedback-Form', 'feedback/novo', 'AlunosController', 'formFeedback', 1, '2025-12-11 18:00:06', '2025-12-11 18:00:06', 0, NULL),
+(29, 'Feedback-Form', 'feedback/novo', 'AlunosController', 'formFeedback', 1, '2025-12-11 18:02:09', '2025-12-11 18:02:09', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,16 +118,80 @@ INSERT INTO `routes` (`id`, `nome_rota`, `slug`, `controller`, `action`, `status
 -- Estrutura para tabela `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `usu_id` int NOT NULL AUTO_INCREMENT,
-  `usu_email` varchar(150) NOT NULL,
-  `usu_phone` varchar(20) DEFAULT NULL,
-  `usu_password` varchar(255) NOT NULL,
-  `usu_data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`usu_id`),
-  UNIQUE KEY `usu_email` (`usu_email`)
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL,
+  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `tel` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `data` datetime DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(255) NOT NULL,
+  `cpf` varchar(14) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `email`, `tel`, `password`, `data`, `name`, `cpf`) VALUES
+(1, 'teste@teste.com', '11999999999', '1234', '2025-12-11 23:07:17', 'João', '000.000.000-00'),
+(2, '', NULL, '', '2025-12-11 23:07:17', '', '');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`fb_id`);
+
+--
+-- Índices de tabela `form_pessoafisica`
+--
+ALTER TABLE `form_pessoafisica`
+  ADD PRIMARY KEY (`pf_id`);
+
+--
+-- Índices de tabela `routes`
+--
+ALTER TABLE `routes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `usu_email` (`email`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `fb_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `form_pessoafisica`
+--
+ALTER TABLE `form_pessoafisica`
+  MODIFY `pf_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de tabela `routes`
+--
+ALTER TABLE `routes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
