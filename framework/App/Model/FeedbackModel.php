@@ -6,8 +6,7 @@ class FeedbackModel
 {
     private $fb_id;
     private $fb_nome;
-    private $fb_email;
-    private $fb_rating;
+    private $fb_email; 
     private $fb_mensagem;
     private $fb_data;
 
