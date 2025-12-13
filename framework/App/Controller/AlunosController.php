@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use FW\Controller\Action;
-use App\Model\UsuarioModel1;
-use App\DAO\UsuarioDAO1;
+use App\Model\UserModel;
+use App\DAO\UserDAO;
 use App\Model\Form_PessoaFisicaModel;
 use App\Model\form_pjModel;
 use App\Model\form_preModel;
@@ -16,7 +16,7 @@ use App\DAO\form_preDAO;
 
 // NOVAS DEPENDÊNCIAS PARA FEEDBACK
 use App\Model\FeedbackModel; 
-use App\DAO\FeedbackDAO; 
+use App\DAO\FeedbackDAO;
 
 
 class AlunosController extends Action
@@ -283,22 +283,37 @@ class AlunosController extends Action
        
 
         public function inserirUsuario(){
-            
-            $usuario = new UsuarioModel1();
-            $usuarioDAO = new UsuarioDAO1();
-            
-            $usuario->__set('usu_nome', $_POST['usu_nome']);
-            $usuario->__set('usu_email', $_POST['usu_email']);
-            $usuario->__set('usu_senha', $_POST['usu_senha']);
-            
-            if(!$usuarioDAO->inserir($usuario)){
-                 header('Location:/cadastro');
+
+            /* var_dump($_POST);
+            exit;
+             */ 
+            $entrar = new UserModel();
+            $UserDAO = new UserDAO();
+           
+            $entrar->__set('usu_email', $_POST['usu_email']);
+            $entrar->__set('usu_password', $_POST['usu_password']);
+
+            if(!$UserDAO->inserir($entrar)){
+                 header('Location:/');
                  die();
-            } else {
-                 header('Location:/login');
+            } else {    
+                 header('Location:/entrar');
                  die();
             } 
-            header ("Location:/login/listar");
+            header ("Location:/entrar/listar");
+        }
+
+        public function listarUser(){
+
+            $title = "Listagem User";
+            $this->getView()->title = $title;
+            
+            
+            $UserDAO = new UserDAO();
+            $entrar = $UserDAO -> listar();
+            $this->getView()->entrar = $entrar;
+            $this->render('listarUser', 'dashboard');
+    
         }
     
     public function Modo()

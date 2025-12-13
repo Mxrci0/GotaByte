@@ -1,235 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
 
-  <style>
-    .bg-gradient-custom {
-      background: linear-gradient(#3b82f6 0%, #2563eb 100%);
-    }
-    .input-focus:focus {
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-    }
-    .toggle-input:checked + .toggle-slider {
-      background-color: #667eea;
-    }
-    .toggle-input:checked + .toggle-slider:before {
-      transform: translateX(1.25rem);
-    }
-  </style>
+<style>
+  body {
+    background: #f3f4f6;
+    font-family: Arial, sans-serif;
+  }
+  .box {
+    max-width: 400px;
+    margin: 80px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.1);
+    overflow: hidden;
+  }
+  .box-header {
+    background: #2563eb;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  .box-body {
+    padding: 20px;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button:hover {
+    opacity: .9;
+  }
+  .link {
+    text-align: center;
+    margin-top: 15px;
+  }
+</style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
 
-  
-    <style>
-        .faq-item {
-            transition: all 0.3s ease;
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 300px;
-        }
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-    </style>
-</head>
+<body>
 
-
-
-
-  <!-- Formulário -->
-<main class="flex-grow flex items-center justify-center p-4">
-  <div class="w-full max-w-md">
-    <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
-      <div class="bg-gradient-custom py-6 px-8 text-center">
-        <h1 class="text-2xl font-bold text-white">Bem-vindo de volta</h1>
-        <p class="text-white opacity-90 mt-1">Faça login para acessar sua conta</p>
-      </div>
-
-      <div class="px-8 py-6">
-
-        <!-- FORM COMEÇA AQUI -->
-       <form method="POST" action="" id="loginForm">
-
-  <!-- Email -->
-  <div id="emailField" class="mb-4">
-    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-    <div class="relative">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <i class="fas fa-envelope text-gray-400"></i>
-      </div>
-      <input type="email" id="email" name="email"
-        class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg"
-        placeholder="seu@email.com" required>
-    </div>
+<div class="box">
+  <div class="box-header">
+    <h2>Bem-vindo</h2>
+    <p>Faça login para continuar</p>
   </div>
 
-  <!-- Telefone -->
-  <div id="phoneField" class="mb-4 hidden">
-    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Número de telefone</label>
-    <div class="relative">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <i class="fas fa-phone text-gray-400"></i>
-      </div>
-      <input type="tel" id="phone" name="phone"
-        class="input-focus w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg"
-        placeholder="(00) 00000-0000">
+  <div class="box-body">
+    <form method="POST" action="/entrar/inserir">
+
+      <input type="email" name="usu_email" placeholder="E-mail" required>
+
+      <input type="password" name="usu_password" id="password" placeholder="Senha" required>
+      <input type="checkbox" onclick="toggleSenha()"> Mostrar Senha
+
+      <br><br>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div class="link">
+      <p>Não tem conta? <a href="/">Cadastre-se</a></p>
     </div>
   </div>
+</div>
 
-  <!-- Senha -->
-  <div class="mb-4">
-    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
-    <div class="relative">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <i class="fas fa-lock text-gray-400"></i>
-      </div>
-      <input type="password" id="password" name="password"
-        class="input-focus w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg"
-        placeholder="••••••••" required>
-      <button type="button" id="togglePassword" class="absolute right-3 top-2 text-gray-400 hover:text-gray-600">
-        <i class="fas fa-eye"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- Botão Entrar -->
-  <button type="submit"
-    class="w-full bg-gradient-custom text-white py-2 px-4 rounded-lg font-medium hover:opacity-90 transition">
-    Entrar
-  </button>
-
-</form>
-
-
-      </div>
-    </div>
-  </div>  
-
-
-          <!-- Link Cadastro -->
-          <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600">
-              Não tem uma conta?
-              <a href="/cadastro" class="text-indigo-600 hover:text-indigo-500 font-medium">Cadastre-se</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- JavaScript funcional -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const loginMethodToggle = document.getElementById('loginMethodToggle');
-      const emailField = document.getElementById('emailField');
-      const phoneField = document.getElementById('phoneField');
-      const passwordInput = document.getElementById('password');
-      const togglePassword = document.getElementById('togglePassword');
-      const phoneInput = document.getElementById('phone');
-
-     
-
-      // Mostrar/ocultar senha
-      togglePassword.addEventListener('click', () => {
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-        togglePassword.innerHTML = type === 'password'
-          ? '<i class="fas fa-eye"></i>'
-          : '<i class="fas fa-eye-slash"></i>';
-      });
-
-      // Máscara telefone
-      phoneInput.addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 11) value = value.slice(0, 11);
-        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-        if (value.length > 10) value = value.replace(/(\d{5})(\d)/, '$1-$2');
-        else if (value.length > 9) value = value.replace(/(\d{4})(\d)/, '$1-$2');
-        e.target.value = value;
-      });
-
-      // Envio do formulário
-      document.getElementById('loginForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert("Login enviado com sucesso!");
-      });
-    });
-      document.addEventListener('DOMContentLoaded', function () {
-        const links = document.querySelectorAll('.nav-link');
-        const currentPage = window.location.pathname.split('/').pop();
-
-        links.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === currentPage) {
-                link.classList.add('text-cyan-600', 'font-semibold');
-            } else {
-                link.classList.add('text-gray-600', 'hover:text-cyan-600');
-            }
-        });
-    });
-    // Toggle menu mobile
-        document.getElementById('menu-button').addEventListener('click', function () {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Abrir primeiro item do FAQ
-        document.addEventListener('DOMContentLoaded', function () {
-            const firstFaq = document.querySelector('.faq-item');
-            if (firstFaq) firstFaq.classList.add('active');
-
-            // Destacar link atual
-            const links = document.querySelectorAll('.nav-link');
-            const currentPage = window.location.pathname.split('/').pop();
-
-            links.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPage) {
-                    link.classList.add('text-cyan-600', 'font-semibold');
-                } else {
-                    link.classList.add('text-gray-600', 'hover:text-cyan-600');
-                }
-            });
-        });
-
-        // FAQ toggle
-        function toggleFAQ(element) {
-            const faqItem = element.closest('.faq-item');
-            faqItem.classList.toggle('active');
-
-            const container = faqItem.parentElement;
-            container.querySelectorAll('.faq-item').forEach(item => {
-                if (item !== faqItem) {
-                    item.classList.remove('active');
-                }
-            });
-        }
-        // Alterna menu mobile
-    document.getElementById('menu-button').addEventListener('click', function () {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-
-    // Destaque do link ativo (hover fixo)
-    document.addEventListener('DOMContentLoaded', function () {
-        const links = document.querySelectorAll('.nav-link');
-        const currentPage = window.location.pathname.split('/').pop(); // pega o nome do arquivo atual
-
-        links.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === currentPage) {
-                // Aplica estilo hover fixo no link ativo
-                link.classList.add('text-cyan-600', 'font-semibold');
-                link.classList.remove('text-gray-600');
-            } else {
-                // Links não ativos ficam cinza com hover cyan
-                link.classList.add('text-gray-600', 'hover:text-cyan-600');
-                link.classList.remove('text-cyan-600', 'font-semibold');
-            }
-        });
-    });
-  </script>
+<script>
+function toggleSenha() {
+  const input = document.getElementById('password');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+</script>
 
 </body>
 </html>

@@ -2,11 +2,10 @@
 
 namespace App\Model;
 
-class UsuariosModel
+class UserModel
 {
     private $usu_id;
     private $usu_email;
-    private $usu_phone;
     private $usu_password;
     private $usu_data;
 
