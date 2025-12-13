@@ -3,14 +3,16 @@
 namespace App\Controller;
 
 use FW\Controller\Action;
-use App\Model\UsuarioModel;
-use App\DAO\UsuarioDAO;
+use App\Model\UsuarioModel1;
+use App\DAO\UsuarioDAO1;
 use App\Model\Form_PessoaFisicaModel;
 use App\Model\form_pjModel;
 use App\Model\form_preModel;
 use App\DAO\Form_PessoaFisicaDAO;
 use App\DAO\form_pjDAO;
 use App\DAO\form_preDAO;
+
+
 
 // NOVAS DEPENDÊNCIAS PARA FEEDBACK
 use App\Model\FeedbackModel; 
@@ -207,14 +209,15 @@ class AlunosController extends Action
      */
     public function inserirfeed()
     {
+/* var_dump($_POST);
+        exit; */
         $feed = new FeedbackModel();
         $feedbackDAO = new FeedbackDAO();
 
-        $feed -> __set('fb_id', $_POST['fb_id']);
-        $feed -> __set('name', $_POST['fb_nome']);
-        $feed -> __set('email', $_POST['fb_email']);
-        $feed -> __set('rating', $_POST['fb_rating']);
-        $feed -> __set('message', $_POST['fb_mensagem']);
+        $feed -> __set('fb_nome', $_POST['fb_nome']);
+        $feed -> __set('fb_email', $_POST['fb_email']);
+  
+        $feed -> __set('fb_mensagem', $_POST['fb_mensagem']);
         $feed -> __set('fb_data', date('Y-m-d H:i:s'));
 
         if(!$feedbackDAO -> inserir($feed)){
@@ -227,110 +230,76 @@ class AlunosController extends Action
 
         
     }
-       /*  // Verifica se os dados foram enviados por POST
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    public function listarfeed(){
+
+        $title = "Listagem Feedback";
+        $this->getView()->title = $title;
+        
+        
+        $feedbackDAO = new FeedbackDAO();
+        $feed = $feedbackDAO -> listar();
+        $this->getView()->feed = $feed;
+        $this->render('listarfeed', 'dashboard');
+    }
+
+        public function excluirfeed()
+    {
+        $feedbackDAO = new FeedbackDAO();
+        if(isset($this->getParams()[0])){
+            $feedbackDAO->excluir($this->getParams()[0]);
+        }
+        header("Location:/alunos/listarfeed");
+    }
+
+    public function editarfeed(){
+        
+        $feed = new FeedbackModel();
+        $feedbackDAO = new FeedbackDAO();
+        
+        $feed = $feedbackDAO->buscarPorId($this->getParams()[0]);
             
+      
+        $this->getView()->feed = $feed;
+
+        $title = "Editar Feedback";
+        $this->getView()->title = $title;
+        
+        $this->render('feededitar', 'dashboard');
+
+    }
+        public function alterarfeed(){
             $feed = new FeedbackModel();
             $feedbackDAO = new FeedbackDAO();
 
-            // 1. Coleta e sanitização dos dados (AJUSTE OS NOMES DOS CAMPOS POST CONFORME SEU FORMULÁRIO)
-            $fb_nome     = $_POST['fb_nome'] ?? '';
-            $fb_email    = $_POST['fb_email'] ?? '';
-            $fb_rating   = $_POST['fb_rating'] ?? 0;
-            $fb_mensagem = $_POST['fb_mensagem'] ?? '';
+            $feed->__set('fb_id', $_POST['fb_id']);
+            $feed->__set('fb_nome', $_POST['fb_nome']);
+            $feed->__set('fb_email', $_POST['fb_email']);
+            $feed->__set('fb_mensagem', $_POST['fb_mensagem']);
+
+            $feedbackDAO->alterar($feed);
+            header("Location: /alunos/listarfeed");
             
-            // 2. Popula o modelo
-            $feed->__set('fb_nome', $fb_nome);
-            $feed->__set('fb_email', $fb_email);
-            $feed->__set('fb_rating', $fb_rating);
-            $feed->__set('fb_mensagem', $fb_mensagem);
-
-            try {
-                // 3. Insere no banco de dados
-                $feedbackDAO->inserir($feed);
-                ,
-                // Redireciona para uma página de sucesso ou volta para a lista
-                header('Location: /feedback/listar?success=1');
-                die();
-            } catch (\Exception $e) {
-                // Trata erro de inserção (o DAO já redireciona para /error103)
-                header('Location: /error103');
-                die();
-            }
-        } else {
-            // Se for um GET na rota de POST, redireciona para o formulário
-            header('Location: /feedback/novo'); 
-            die();
         }
-    } */
+       
 
-
-    /**
-     * Lista todos os feedbacks (Geralmente para um painel administrativo)
-     * Rota: /feedback/listar -> AlunosController@listarFeedback
-     */
-    public function listarFeedback()
-    {
-        $title = "Listagem de Feedbacks";
-        $this->getView()->title = $title;
-        
-        $feedbackDAO = new FeedbackDAO();
-        $feedbacks = $feedbackDAO->listar();
-        
-        $this->getView()->feedbacks = $feedbacks;
-        
-        // CORREÇÃO APLICADA: Renderiza a view 'fb_listar' na pasta 'alunos'
-        $this->render('fb_listar', 'dashboard');
-    }
-
-    /**
-     * Busca um feedback específico pelo ID (para visualização ou edição)
-     * Rota Dinâmica: /feedback/consultar/{id} -> AlunosController@buscarFeedbackPorId
-     */
-    public function buscarFeedbackPorId()
-    {
-        // Obtém o ID do feedback do array de parâmetros da URL
-        $id = $this->getParams()[0] ?? null;
-
-        if (!$id) {
-            header('Location: /feedback/listar?error=id_invalido');
-            die();
+        public function inserirUsuario(){
+            
+            $usuario = new UsuarioModel1();
+            $usuarioDAO = new UsuarioDAO1();
+            
+            $usuario->__set('usu_nome', $_POST['usu_nome']);
+            $usuario->__set('usu_email', $_POST['usu_email']);
+            $usuario->__set('usu_senha', $_POST['usu_senha']);
+            
+            if(!$usuarioDAO->inserir($usuario)){
+                 header('Location:/cadastro');
+                 die();
+            } else {
+                 header('Location:/login');
+                 die();
+            } 
+            header ("Location:/login/listar");
         }
-
-        $feedbackDAO = new FeedbackDAO();
-        // É essencial que o método 'buscarPorId' exista e funcione no seu FeedbackDAO
-        $feedback = $feedbackDAO->buscarPorId($id); 
-        
-        $title = "Detalhes do Feedback";
-        $this->getView()->title = $title;
-        $this->getView()->feedback = $feedback;
-
-        // CORREÇÃO APLICADA: Renderiza a view 'fb_detalhe' na pasta 'alunos'
-        $this->render('fb_detalhe', 'dashboard');
-    }
-
-    /**
-     * Exclui um feedback pelo ID
-     * Rota Dinâmica: /feedback/excluir/{id} -> AlunosController@excluirFeedback
-     */
-    public function excluirFeedback()
-    {
-        // Obtém o ID do feedback
-        $id = $this->getParams()[0] ?? null;
-
-        if ($id) {
-            $feedbackDAO = new FeedbackDAO();
-            // É essencial que o método 'excluir' exista e funcione no seu FeedbackDAO
-            $feedbackDAO->excluir($id); 
-        }
-        
-        // Redireciona de volta para a listagem
-        header("Location: /feedback/listar");
-        die();
-    }
-
-
-    // --- OUTROS MÉTODOS EXISTENTES ---
     
     public function Modo()
     {
