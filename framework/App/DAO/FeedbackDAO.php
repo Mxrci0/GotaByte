@@ -104,7 +104,7 @@ class FeedbackDAO extends DAO
         try {
             $sql = "SELECT * FROM feedback WHERE fb_id = :fb_id";
             $stmt = $this->getConn()->prepare($sql);
-            $stmt->bindValue(':fb_id', $fb_id);
+            $stmt->bindValue(":fb_id", $fb_id);
             $stmt->execute();
             $results = $stmt->fetch(\PDO::FETCH_ASSOC);
             if ($results > 0) {

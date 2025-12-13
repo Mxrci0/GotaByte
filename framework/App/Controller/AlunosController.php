@@ -248,7 +248,7 @@ class AlunosController extends Action
         if(isset($this->getParams()[0])){
             $feedbackDAO->excluir($this->getParams()[0]);
         }
-        header("Location:/alunos/listarfeed");
+        header("Location: /feed/listar");
     }
 
     public function editarfeed(){
@@ -277,7 +277,7 @@ class AlunosController extends Action
             $feed->__set('fb_mensagem', $_POST['fb_mensagem']);
 
             $feedbackDAO->alterar($feed);
-            header("Location: /alunos/listarfeed");
+            header("Location: /feed/listar");
             
         }
        
@@ -315,6 +315,43 @@ class AlunosController extends Action
             $this->render('listarUser', 'dashboard');
     
         }
+
+    public function editarUser(){
+        
+        $entrar = new UserModel();
+        $UserDAO = new UserDAO();
+        
+        $entrar = $UserDAO->buscarPorId($this->getParams()[0]);
+            
+        $this->getView()->entrar = $entrar;
+
+        $title = "Editar User";
+        $this->getView()->title = $title;
+        
+        $this->render('editarUser', 'dashboard');
+    }
+        public function alterarUser(){
+            $entrar = new UserModel();
+            $UserDAO = new UserDAO();
+
+            $entrar->__set('usu_id', $_POST['usu_id']);
+            $entrar->__set('usu_email', $_POST['usu_email']);
+            $entrar->__set('usu_password', $_POST['usu_password']);
+
+            $UserDAO->alterar($entrar);
+            header("Location: /entrar/listar");
+            
+        }
+    public function excluirUser()
+    {
+        
+        $UserDAO = new UserDAO();
+        if(isset($this->getParams()[0])){
+            $UserDAO->excluir($this->getParams()[0]);   
+        }
+        header("Location:/entrar/listar");
+    }
+
     
     public function Modo()
     {

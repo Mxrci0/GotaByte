@@ -13,10 +13,9 @@
             <td><?php echo $dado->__get('usu_email'); ?></td>
             <td><?php echo $dado->__get('usu_password'); ?></td>
             <td>
-                <a href="/entrar/editar/<?php echo $dado->__get('usu_id'); ?>">Editar</a>
-                <a href="/entrar/deletar/<?php echo $dado->__get('usu_id'); ?>">Deletar</a>
+                <a href="/entrar/editar/usuario/<?php echo $dado->__get('usu_id'); ?>">Editar</a> / <a href="/entrar/excluir/usuario/<?php echo $dado->__get('usu_id'); ?>">Excluir</a>
             </td>   
 
  </tr>
         <?php } ?>
-</table>
+</table>    

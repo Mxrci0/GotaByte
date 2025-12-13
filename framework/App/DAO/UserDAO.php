@@ -38,21 +38,67 @@ class UserDAO extends DAO
             $stmt->execute();
         } catch (PDOException $e) {
             echo "Erro ao excluir usuário: " . $e->getMessage();
-            return false;
+            die();
         }
 
        
         
     }
     
-    public function alterar( $obj)
+    
+    public function alterar( $var)
     {
-        // Implementation for alterar
+       try{
+        $sql = "UPDATE usuarios 
+        SET 
+        usu_email = :usu_email, usu_password = :usu_password WHERE usu_id = :usu_id";
+        
+        $stmt = $this->getConn()->prepare($sql);
+        
+        $usu_id = $var->__get('usu_id');
+        $usu_email = $var->__get('usu_email');
+        $usu_password = password_hash($var->__get('usu_password'), PASSWORD_BCRYPT);
+
+
+        $stmt->bindparam(':usu_id', $usu_id);
+        $stmt->bindparam(':usu_email', $usu_email);
+        $stmt->bindparam(':usu_password', $usu_password);
+
+
+        $stmt->execute();
+       } catch (PDOException $e) {
+        echo "Erro ao alterar usuário: " . $e->getMessage();
+        return false;
+
+       }
     }
     
-    public function buscarPorId($id)
-    {
-        // Implementation for buscarPorId
+    public function buscarPorId($usu_id)
+    {   
+        try{
+        $sql = "SELECT * FROM usuarios WHERE usu_id = :usu_id";
+
+        $stmt = $this->getConn()->prepare($sql);
+        $stmt->bindValue(':usu_id', $usu_id);
+        $stmt->execute();
+        $results = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($results > 0 ){
+                $entrar = new UserModel();
+                $entrar->__set('usu_id', $results['usu_id']);
+                $entrar->__set('usu_email', $results['usu_email']);
+                $entrar->__set('usu_password', $results['usu_password']);
+                $entrar->__set('usu_data', $results['usu_data']);
+                
+                return $entrar;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            error_log('location: /error103');
+            die();
+
+        }
+      
     }
     
     public function listar()
@@ -64,16 +110,16 @@ class UserDAO extends DAO
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $users = [];
+   
         foreach ($results as $row) {
-            $user = new UserModel();
-            $user->__set('usu_id', $row['usu_id']);
-            $user->__set('usu_email', $row['usu_email']);
-            $user->__set('usu_password', $row['usu_password']);
-            $user->__set('usu_data', $row['usu_data']);
+            $entrar = new UserModel();
+            $entrar->__set('usu_id', $row['usu_id']);
+            $entrar->__set('usu_email', $row['usu_email']);
+            $entrar->__set('usu_password', $row['usu_password']);
+            $entrar->__set('usu_data', $row['usu_data']);
         
 
-            array_push($UserList, $user);
+            array_push($UserList, $entrar);
         }
 
         return $UserList;

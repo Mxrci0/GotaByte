@@ -14,7 +14,7 @@
             <td><?php echo $dado->__get('fb_email'); ?></td>
             <td><?php echo $dado->__get('fb_mensagem'); ?></td>
             <td>
-                <a href="/feed/editar/feedback/<?php echo $dado->__get('fb_id'); ?>">Editar</a> / <a href="/Feed/excluir/feedback/<?php echo $dado->__get('fb_id'); ?>">Excluir</a>
+                <a href="/feed/editar/feedback/<?php echo $dado->__get('fb_id'); ?>">Editar</a> / <a href="/feed/excluir/feedback/<?php echo $dado->__get('fb_id'); ?>">Excluir</a>
         
 
  </tr>
